@@ -1,0 +1,54 @@
+// Defined things in the app.scss to then use them here
+@import '../App';
+
+// Setting up mixins
+@mixin sideNavs{
+    display: flex;
+    font-size: 1.2rem;
+    gap: 10px;
+    width: 33vw;
+}
+
+// Main CSS
+nav {
+    background-color: grey;
+    background-color: $color5;
+    font-family: $font-stack;
+    height: $nav-height;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    color: $color1;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+
+}
+
+.leftNav{
+    @include sideNavs;
+    padding: 0px 0px 0px 20px;
+    a {
+        @include removeUnderline;
+        color: $color1;
+    }
+}
+
+.centerNav{
+    width: 33vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+
+}
+
+.rightNav{
+    @include sideNavs;
+    justify-content: flex-end;
+    padding: 0px 30px 0px 0px;
+    width: 33vw;
+    a {
+        @include removeUnderline;
+        color: $color1;
+    }
+}
+

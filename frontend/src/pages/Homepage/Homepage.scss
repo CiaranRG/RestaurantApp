@@ -1,0 +1,24 @@
+@import '../../App';
+
+.homeWrapper {
+    height: $page-height;
+    flex-direction: column;
+    color: $color4;
+    @include flex-center;
+    background-color: rgba($color: black, $alpha: 0.6);
+    text-align: center;
+}
+
+.homeHeaderText {
+    font-size: 8rem;
+}
+
+.homeSubHeaderText {
+    font-size: 5rem;
+}
+
+.homeButtons{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}

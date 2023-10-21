@@ -1,0 +1,25 @@
+@import '../../App';
+
+.reservationsWrapper {
+    height: $page-height;
+    flex-direction: column;
+    background-color: rgba($color: black, $alpha: 0.6);
+    text-align: center;
+    @include flex-center;
+    color: $color1;
+}
+
+.reservationsHeaderText {
+    font-size: 8rem;
+}
+
+.reservationsSubHeaderText {
+    font-size: 5rem;
+}
+
+.reservationsForm{
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    font-size: 2rem;
+}

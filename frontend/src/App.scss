@@ -1,0 +1,37 @@
+html, body, h1 {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    font-family: 'Roboto', sans-serif;
+}
+
+// Doing this allows me to change just this here and it will change each individual thing instead of going one by one
+$font-stack: 'Roboto', sans-serif;
+$nav-height: 60px;
+$page-height: calc(100vh - #{$nav-height});
+
+// Setting up a color palette
+$color1: #ede0d4;   
+$color2: #e6ccb2;   
+$color3: #ddb892;   
+$color4: #b08968;   
+$color5: #7f5539;   
+$color6: #9c6644;   
+
+// We can include this property in other pages to center things fast
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+@mixin removeUnderline {
+    text-decoration: none;
+    color: $color1;
+}
+
+.pageBackground {
+    height: $page-height;
+    background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+}

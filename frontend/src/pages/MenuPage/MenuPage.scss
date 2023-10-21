@@ -1,0 +1,22 @@
+@import '../../App';
+
+.menuWrapper {
+    height: $page-height;
+    flex-direction: column;
+    color: $color4;
+    @include flex-center;
+    background-color: rgba($color: black, $alpha: 0.6);
+    text-align: center;
+}
+
+.menuHeaderText {
+    font-size: 8rem;
+}
+
+.menuSubHeaderText {
+    font-size: 5rem;
+}
+
+.space{
+    flex-grow: 1;
+}
