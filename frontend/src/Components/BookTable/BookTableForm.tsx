@@ -1,6 +1,7 @@
 import { useState } from "react";
 import './BookTableForm.scss'
 import Button from "./Button";
+import axios from 'axios'
 
 // Defining the form types
 type FormInfo = {
@@ -33,47 +34,80 @@ export default function BookTableForm(){
             setFormInfo(prevInfo => ({ ...prevInfo, [name]: value }));
         }
     }
+    // Setting the type to be a form event 
+    const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
+        evt.preventDefault()
+        try {
+            // Setting the route to post to and the thing to post
+            const response = await axios.post('http://localhost:5000/api/reservations', formInfo)
+            console.log('Your Requests has been submitted', response)
+            setFormInfo({firstName: '', lastName: '', email: '', phoneNumber: '', bookingDate: '', bookingTime: '', specialRequest: '', numOfSeats: 1, termsConditions: false})
+        } catch (error) {
+            console.log('There was an error', error)
+        }
+    }
 
     return(
-        <div className="bookTableForm">
-            <label>
-                First Name:
-                <input type="text" name="firstName" value={formInfo.firstName} onChange={handleChange}/>
-            </label>
-            <label>
-                Last Name:
-                <input type="text" name="lastName" value={formInfo.lastName} onChange={handleChange}/>
-            </label>
-            <label>
-                Email:
-                <input type="email" name="email" value={formInfo.email} onChange={handleChange}/>
-            </label>
-            <label>
-                Phone Number:
-                <input type="tel" name="phoneNumber" value={formInfo.phoneNumber} onChange={handleChange}/>
-            </label>
-            <label>
-                Date Of Booking:
-                <input type="date" name="bookingDate" value={formInfo.bookingDate} onChange={handleChange}/>
-            </label>
-            <label>
-                Time Of Booking:
-                <input type="time" name="bookingTime" value={formInfo.bookingTime} onChange={handleChange}/>
-            </label>
-            <label>
-                Number Of Seats:
-                <input type="number" name="numOfSeats" value={formInfo.numOfSeats} onChange={handleChange}/>
-            </label>
-            <label>
-                Special Requests:
-                <textarea name="specialRequest" value={formInfo.specialRequest} onChange={handleChange}></textarea>
-            </label>
-            {/* Using the checked to change the value of the checkbox */}
-            <label style={{marginBottom: '20px'}}>
-                I agree to the terms and conditions:
-                <input type="checkbox" name="termsConditions" checked={formInfo.termsConditions} onChange={handleChange}/>
-            </label>
-            <Button text="Create Reservation"/>
+        <div className="bookTableFormDiv">
+            <form action="" className="bookTableForm" onSubmit={handleSubmit}>
+                <div className="formRow">
+                    <label>
+                        First Name:
+                        <input type="text" required name="firstName" minLength={2} maxLength={50} value={formInfo.firstName} onChange={handleChange}/>
+                    </label>
+                </div>
+                <div className="formRow">
+                    <label>
+                        Last Name:
+                        <input type="text" required name="lastName" minLength={2} maxLength={50} value={formInfo.lastName} onChange={handleChange}/>
+                    </label>
+                </div>
+                <div className="formRow">
+                    <label>
+                        Email:
+                    </label>
+                    <input type="email" required name="email" value={formInfo.email} onChange={handleChange}/>
+                </div>
+                <div className="formRow">
+                    <label>
+                        Phone Number:
+                    </label>
+                    <input type="tel" required name="phoneNumber" value={formInfo.phoneNumber} placeholder="" onChange={handleChange}/>
+                </div>
+                <div className="formRow">
+                    <label>
+                        Booking Date:
+                    </label>
+                    {/* Use javascript to update min date to be the current one  */}
+                    <input type="date" required name="bookingDate" autoComplete="off" min="2023-01-01" max="2024-01-01" value={formInfo.bookingDate} onChange={handleChange}/>
+                </div>
+                <div className="formRow">
+                    <label>
+                        Time Of Booking:
+                        <input type="time" required name="bookingTime" autoComplete="off" value={formInfo.bookingTime} onChange={handleChange}/>
+                    </label>
+                </div>
+                <div className="formRow">
+                    <label>
+                        Number Of Seats:
+                        <input type="number" required min={1} max={6} name="numOfSeats" value={formInfo.numOfSeats} onChange={handleChange}/>
+                    </label>
+                </div>
+                <div className="formRow">
+                    <label>
+                        Special Requests:
+                        <textarea name="specialRequest" required maxLength={50} value={formInfo.specialRequest} onChange={handleChange}></textarea>
+                    </label>
+                </div>
+                <div className="formRow">
+                    {/* Using the checked to change the value of the checkbox */}
+                    <label style={{marginBottom: '20px'}}>
+                        I agree to the terms and conditions:
+                        <input type="checkbox" name="termsConditions" required checked={formInfo.termsConditions} onChange={handleChange}/>
+                    </label>
+                </div>
+                <Button text="Create Reservation"/>
+            </form>
         </div>
     )
 }

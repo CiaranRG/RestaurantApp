@@ -28,8 +28,12 @@ export default function Navbar(){
             </div>
             <div className='rightNav'>
                 {/* <a href="">My Account</a> */}
-                <a href="">Login</a>
-                <a href="">Register</a>
+                <Link to='/login'>
+                    <a href="">Login</a>
+                </Link>
+                <Link to='/registration'>
+                    <a href="">Register</a>
+                </Link>
             </div>
         </nav>
     )

@@ -6,6 +6,7 @@ import Navbar from './Navbar/Navbar'
 import Homepage from './pages/Homepage/Homepage'
 import MenuPage from './pages/MenuPage/MenuPage'
 import ReservationsPage from './pages/ReservationsPage/ReservationsPage'
+import RegistrationPage from './pages/AccountPages/LoginAndRegistration/RegistrationPage'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path='/home' element={<Homepage/>}/>
           <Route path='/menu' element={<MenuPage/>}/>
           <Route path='/reservations' element={<ReservationsPage/>}/>
+          <Route path='/registration' element={<RegistrationPage/>}/>
         </Routes>
     </Router>
   )
