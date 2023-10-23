@@ -1,21 +1,12 @@
 // Defined things in the app.scss to then use them here
 @import '../App';
 
-// Setting up mixins
-@mixin sideNavs{
-    display: flex;
-    font-size: 1.2rem;
-    gap: 10px;
-    width: 33vw;
-}
-
 // Main CSS
 nav {
     background-color: grey;
     background-color: $color5;
     font-family: $font-stack;
     height: $nav-height;
-    width: 100vw;
     display: flex;
     align-items: center;
     color: $color1;
@@ -28,7 +19,7 @@ nav {
     padding: 0px 0px 0px 20px;
     a {
         @include removeUnderline;
-        color: $color1;
+        color: $text-color;
     }
 }
 
@@ -48,7 +39,7 @@ nav {
     width: 33vw;
     a {
         @include removeUnderline;
-        color: $color1;
+        color: $text-color;
     }
 }
 

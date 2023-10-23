@@ -1,19 +1,19 @@
 import { useEffect } from 'react'
 // import { useNavigate } from 'react-router-dom'
-import './MenuPage.scss'
+import './GalleryPage.scss'
 
 
-export default function MenuPage(){
+export default function GalleryPage(){
     // const navigate = useNavigate();
     useEffect(()=>{
-        document.title = 'Menu'
+        document.title = 'Gallery'
     },[])
     
     return(
         <main className='pageBackground'>
             <div className='pageWrapper'>
-                <h1 className='menuHeaderText'>Menu Page</h1>
-                <h2 className='menuSubheaderText'>This is the subheader text for this menu page</h2>
+                <h1 className='galleryHeaderText'>Gallery Page</h1>
+                <h2 className='gallerySubheaderText'>This is the subheader text for this gallery page</h2>
             </div>
         </main>
     )

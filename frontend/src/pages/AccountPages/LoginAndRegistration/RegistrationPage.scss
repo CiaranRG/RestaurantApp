@@ -17,15 +17,8 @@
 
 
 // Form CSS
-.bookTableForm{
-    @include flex-center;
-    flex-direction: column;
-    background-color: $color5;
-    padding: 20px;
-    border-radius: 20px;
-}
 
-.bookTableFormDiv{
+.registrationFormDiv{
     @include flex-center;
     flex-direction: column;
     border: 3px solid $color4;
@@ -34,25 +27,24 @@
     border-radius: 20px;
 }
 
-.formRow{
+.regiFormRow{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 10px 10px 10px 10px;
     input{
         padding-left: 5px;
         height: 22px;
         border-radius: 5px;
         border: 2px solid $color4;
-    }
-    textarea{
-        padding-left: 5px;
-        height: 32px;
-        border-radius: 5px;
-        border: 2px solid $color4;
+        font-size: 1.5rem;
+        width: 200px;
+        height: 40px;
     }
     label{
         text-shadow: 2px 2px 2px black;
         margin-right: 10px;
         margin-bottom: 4px;
+        font-size: 3rem;
     }
 }

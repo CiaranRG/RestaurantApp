@@ -22,6 +22,8 @@ const db = new Pool({
   port: 5432, // Default port for PostgreSQL
 });
 
+// Reservation Routes
+
 // Using this to send information to the react frontend when we get this request
 app.get('/api', (req, res) => {
     res.json({message: `Hello from the backend on Port ${PORT}`})
@@ -55,6 +57,25 @@ app.post('/api/reservations', async (req, res) => {
         console.error(err);
     }
 });
+
+app.post('/api/accounts', (req, res) => {
+    const newAccount = req.body
+    console.log(newAccount)
+    try {
+        const result = db.query(
+            'INSERT INTO user_accounts (username, email, password) VALUES ($1, $2, $3) RETURNING *',
+            [
+                newAccount.username,
+                newAccount.email,
+                newAccount.password
+            ]
+        )
+        res.status(201).json({message: 'Data Submitted'});
+    } catch (error) {
+        res.status(500).json({error: 'Database error'});
+        console.log(error)
+    }
+})
 
 app.get('/api/reservations', (req, res) => {
     res.json(reservations);

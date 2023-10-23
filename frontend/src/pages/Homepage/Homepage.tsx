@@ -1,8 +1,12 @@
 import './Homepage.scss'
 import Button from '../../Components/BookTable/Button'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 
 export default function Homepage(){
+    useEffect(()=>{
+        document.title = 'Home'
+    },[])
     return(
         <main className='pageBackground'>
             <div className='pageWrapper'>

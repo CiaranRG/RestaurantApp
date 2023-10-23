@@ -19,9 +19,6 @@ export default function Navbar(){
                 <Link to='/gallery'>
                     <a href="/reservations">Gallery</a>
                 </Link>
-                {/* Add the contact/about us  to the footer at the bottom of the page */}
-                {/* <a href="">Contact Us</a> */}
-                {/* <a href="">About Us</a> */}
             </div>
             <div className='centerNav'>
                 <h2>Restaurant Name</h2>

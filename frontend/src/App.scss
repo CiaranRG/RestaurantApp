@@ -1,4 +1,4 @@
-html, body, h1 {
+html, body, h1, footer, main {
     margin: 0;
     padding: 0;
     background-color: transparent;
@@ -16,7 +16,8 @@ $color2: #e6ccb2;
 $color3: #ddb892;   
 $color4: #b08968;   
 $color5: #7f5539;   
-$color6: #9c6644;   
+$color6: #9c6644;  
+$text-color: $color1;
 
 // We can include this property in other pages to center things fast
 @mixin flex-center {
@@ -29,6 +30,14 @@ $color6: #9c6644;
 @mixin removeUnderline {
     text-decoration: none;
     color: $color1;
+}
+
+// Setting up mixins
+@mixin sideNavs{
+    display: flex;
+    font-size: 1.2rem;
+    gap: 10px;
+    width: 33vw;
 }
 
 .pageBackground {
