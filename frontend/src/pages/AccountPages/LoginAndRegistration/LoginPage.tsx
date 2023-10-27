@@ -4,23 +4,22 @@ import axios from 'axios'
 import { useEffect, useState} from 'react'
 
 // Defining Types
-type RegisterInfo = {
+type LoginInfo = {
     username: string;
-    email: string;
     password: string;
 }
 
 export default function LoginPage(){
-    const [registerInfo, setRegisterInfo] = useState<RegisterInfo>({username: '', email: '', password: ''})
+    const [loginInfo, setLoginInfo] = useState<LoginInfo>({username: '', password: ''})
     useEffect(()=>{
         document.title = 'Login'
     },[])
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
         try {
-            const response = await axios.post('http://localhost:5000/api/accounts', registerInfo)
+            const response = await axios.post('http://localhost:5000/api/login', loginInfo)
             console.log(response)
-            setRegisterInfo({username: '', email: '', password: ''})
+            setLoginInfo({username: '', password: ''})
         } catch (error) {
             console.log(error)
         }
@@ -30,7 +29,7 @@ export default function LoginPage(){
     const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
         // Destructuring the values and the type so we can run a check below
         const { name, value } = evt.target;
-        setRegisterInfo(prevInfo => ({ ...prevInfo, [name]: value }));
+        setLoginInfo(prevInfo => ({ ...prevInfo, [name]: value }));
     }
     return (
         <main className='pageBackground'>
@@ -43,13 +42,13 @@ export default function LoginPage(){
                             <label htmlFor="">
                             Username:
                             </label>
-                            <input type="text" name='username' value={registerInfo.username} onChange={handleChange}/>
+                            <input type="text" name='username' value={loginInfo.username} onChange={handleChange}/>
                         </div>
                         <div className='loginFormRow'>
                             <label htmlFor="">
                             Password:
                             </label>
-                            <input type="password" name='password' value={registerInfo.password} onChange={handleChange}/>
+                            <input type="password" name='password' value={loginInfo.password} onChange={handleChange}/>
                         </div>
                         <Button text='Login'/>
                     </form>

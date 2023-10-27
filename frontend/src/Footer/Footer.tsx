@@ -5,8 +5,9 @@ export default function Footer(){
     return(
         <footer className="footer">
             <Link to='/aboutUs'>
-                <a href="">If you would like to learn more about us or to contact us then click here!</a>
+                <a href="/aboutUs">If you would like to contact us then click here!</a>
             </Link>
+            <a href="https://unsplash.com/" target="_blank" rel="noopener noreferrer">All photos courtesy of Unsplash</a>
         </footer> 
     )
 }

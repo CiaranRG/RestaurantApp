@@ -29,7 +29,11 @@ nav {
     justify-content: center;
     align-items: center;
     font-size: 1.3rem;
-
+    gap: 20px;
+    a {
+        @include removeUnderline;
+        color: $text-color;
+    }
 }
 
 .rightNav{
@@ -43,3 +47,8 @@ nav {
     }
 }
 
+.reservationBtn{
+    border: 1px solid $color1;
+    padding: 5px;
+    border-radius: 10px;
+}

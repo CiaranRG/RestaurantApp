@@ -9,6 +9,9 @@ config();
 const app = express()
 const PORT = 5000
 
+// Importing joi schemas
+import { registerSchema } from './models/accountsModel.js';
+
 // Add options later to limit who can send requests
 app.use(cors());
 app.use(express.json());
@@ -21,8 +24,6 @@ const db = new Pool({
   password: process.env.PG_PASS,
   port: 5432, // Default port for PostgreSQL
 });
-
-// Reservation Routes
 
 // Using this to send information to the react frontend when we get this request
 app.get('/api', (req, res) => {
@@ -53,15 +54,25 @@ app.post('/api/reservations', async (req, res) => {
         );
         res.status(201).json(result.rows[0]);
     } catch(err) {
-        res.status(500).json({ error: "Database error" });
         console.error(err);
+        res.status(500).json({ error: "Database error" });
     }
 });
+
+app.post('/api/login', (req, res) => {
+    
+})
 
 app.post('/api/accounts', (req, res) => {
     const newAccount = req.body
     console.log(newAccount)
     try {
+        // Check for existence of the error property within this validation
+        const { error } = registerSchema.validate(newAccount)
+        // Throw an error if validation fails to send us to the catch section
+        if (error){
+            throw new Error('Validation error')
+        }
         const result = db.query(
             'INSERT INTO user_accounts (username, email, password) VALUES ($1, $2, $3) RETURNING *',
             [
@@ -71,9 +82,14 @@ app.post('/api/accounts', (req, res) => {
             ]
         )
         res.status(201).json({message: 'Data Submitted'});
-    } catch (error) {
-        res.status(500).json({error: 'Database error'});
-        console.log(error)
+    } catch (err) {
+        if (err.message === 'Validation error'){
+            console.error(err);
+            res.status(400).json({ error: "Validation error", details: err.details, message: 'This is a validation error'});
+        } else {
+            console.error(err);
+            res.status(500).json({ error: "Database error" });
+        }
     }
 })
 

@@ -2,10 +2,11 @@
 
 .footer{
     display: flex;
+    flex-direction: column;
     @include flex-center;
-    gap: 30px;
+    gap: 15px;
     background-color: $color5;
-    height: 5vh;
+    height: 10vh;
     a {
         text-decoration: none;
         color: $text-color;

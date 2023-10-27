@@ -11,7 +11,8 @@ export default function Homepage(){
         <main className='pageBackground'>
             <div className='pageWrapper'>
                 <h1 className='homeHeaderText'>Restaurant Name</h1>
-                <h2 className='homeSubheaderText'>This is the subheader text for this restaurant project idea</h2>
+                <h2 className='homeSubheaderText'>This is the subheader text for the Restaurant we have above!</h2>
+                <h3 className='homeSubheaderText'>Browse our menu or create an account to book a table!</h3>
                 <div className='homeButtons'>
                     <Link to='/reservations'>
                         <Button text={'Book A Table'}/>

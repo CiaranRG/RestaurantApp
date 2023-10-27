@@ -1,6 +1,6 @@
 import Button from '../../../Components/BookTable/Button'
 import './RegistrationPage.scss'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { useEffect, useState} from 'react'
 
 // Defining Types
@@ -10,6 +10,11 @@ type RegisterInfo = {
     password: string;
 }
 
+type ErrorResponse = {
+    error: string;
+    [key: string]: unknown;
+};
+
 export default function RegistrationPage(){
     const [registerInfo, setRegisterInfo] = useState<RegisterInfo>({username: '', email: '', password: ''})
     useEffect(()=>{
@@ -18,13 +23,33 @@ export default function RegistrationPage(){
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
         try {
-            const response = await axios.post('http://localhost:5000/api/accounts', registerInfo)
-            console.log(response)
-            setRegisterInfo({username: '', email: '', password: ''})
-        } catch (error) {
-            console.log(error)
+            const response = await axios.post('http://localhost:5000/api/accounts', registerInfo);
+            console.log(response);
+            setRegisterInfo({username: '', email: '', password: ''});
+        } catch (error: unknown) {
+            if (error.response) {
+                const errorData = error.response.data as ErrorResponse;
+                console.log('An error has occurred:', errorData.error);
+            } else {
+                console.log("Error", error.message);
+            }
         }
-
+        // try {
+        //     const response = await axios.post('http://localhost:5000/api/accounts', registerInfo)
+        //     console.log(response)
+        //     setRegisterInfo({username: '', email: '', password: ''})
+        // } catch (error) {
+        //     console.log(error)
+        //     if  (error.response) {
+        //         if (error.response.status === 404) {
+        //             console.log('404 Error')
+        //         } else {
+        //             console.log('An error has occurred', error.response.data.error)
+        //         }
+        //     } else {
+        //         console.log("Error", error.message)
+        //     }
+        // }
     }
     // Making the type to be a react change event that has either TextAreas or Inputs
     const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,13 +68,13 @@ export default function RegistrationPage(){
                             <label htmlFor="">
                             Username:
                             </label>
-                            <input type="text" name='username' value={registerInfo.username} onChange={handleChange}/>
+                            <input type="text" name='username' min={3} max={30} value={registerInfo.username} onChange={handleChange}/>
                         </div>
                         <div className='regiFormRow'>
                             <label htmlFor="">
                             Email:
                             </label>
-                            <input type="email" name='email' value={registerInfo.email} onChange={handleChange}/>
+                            <input type="text" name='email' value={registerInfo.email} onChange={handleChange}/>
                         </div>
                         <div className='regiFormRow'>
                             <label htmlFor="">
