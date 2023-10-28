@@ -2,7 +2,6 @@
 
 .menuItemDiv{
     color: $text-color;
-    background-image: url('https://plus.unsplash.com/premium_photo-1671547330493-b07d377085ca?auto=format&fit=crop&q=80&w=2071&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-position: center;
     border: 2px solid $text-color;
     border-radius: 10px;
@@ -16,7 +15,7 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-    background-color: rgba($color: black, $alpha: 0.6);
+    background-color: rgba($color: black, $alpha: 0.5);
     border-radius: 7px;
     @include flex-center;
 }

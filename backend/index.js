@@ -16,7 +16,7 @@ import { registerSchema } from './models/accountsModel.js';
 app.use(cors());
 app.use(express.json());
 
-// Creating postgreSQL connection and setting it to pool so we ca
+// Creating postgreSQL connection
 const db = new Pool({
   user: process.env.PG_USER,
   host: 'localhost',
