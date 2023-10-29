@@ -30,6 +30,16 @@ app.get('/api', (req, res) => {
     res.json({message: `Hello from the backend on Port ${PORT}`})
 })
 
+app.get('/api/menu', async (req, res) => {
+    try {
+        const result = await db.query('SELECT * FROM menuItems')
+        res.json(result.rows);
+    } catch (error) {
+        console.log('Error Occurred', error)
+        res.status(500).json({error: 'An error has occurred'})
+    }
+})
+
 // Create a new reservation
 app.post('/api/reservations', async (req, res) => {
     const newReservation = req.body;

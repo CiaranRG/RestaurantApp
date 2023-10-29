@@ -1,12 +1,12 @@
 @import '../../App';
 
-.menuItemDiv{
+.menuItemWrapper{
     color: $text-color;
     background-position: center;
     border: 2px solid $text-color;
     border-radius: 10px;
     height: 30vh;
-    width: 100vh;
+    width: 70vw;
     margin-top: 40px;
 }
 
@@ -22,4 +22,7 @@
 
 .menuMainContent{
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }

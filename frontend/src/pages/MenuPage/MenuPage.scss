@@ -7,3 +7,8 @@
 .menuSubHeaderText {
     font-size: 5rem;
 }
+
+.menuItemsContainer {
+    display: flex;
+    flex-direction: column;
+}

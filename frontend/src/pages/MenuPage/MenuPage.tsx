@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 // import { useNavigate } from 'react-router-dom'
 import './MenuPage.scss'
+import axios from 'axios'
 import MenuItemCard from '../../Components/MenuItemCard/MenuItemCard'
 
 
@@ -13,17 +14,42 @@ const menuDB = [
     },
 ]
 
+type MenuItem = {
+    name: string
+    description: string
+    ingredients: string
+    imgUrl: string
+}
+
 export default function MenuPage(){
-    // const navigate = useNavigate();
+    // Defining the state so it starts as an empty array 
+    const [menuItems, setMenuItems] = useState<MenuItem[]>([])
     useEffect(()=>{
         document.title = 'Menu'
     },[])
-    
+    // Creating a useEffect to fetch the data from the backend
+    useEffect(() => {
+        const response = axios.get('http://localhost:5000/api/menu')
+        .then((response) => {
+            // Setting data in the response to be our array of objects in menuItems
+            setMenuItems(response.data)
+        })
+        .catch((error) => {
+            console.log('Error Occurred', error)
+        })
+        console.log(response)
+
+    }, [])
+
     return(
         <main className='pageBackground'>
             <div className='pageWrapper'>
                 <h1 className='menuHeaderText'>Menu Page</h1>
-                <MenuItemCard name={`${menuDB[0].name}`} desc={`${menuDB[0].desc}`} imgUrl={`${menuDB[0].imgUrl}`} ingredients={`${menuDB[0].ingredients}`}/>
+                <div className='menuItemsContainer'>
+                    {menuItems.map((item: MenuItem, index: number) => (
+                        <MenuItemCard key={index} name={`${item.name}`} desc={`${item.description}`} imgUrl={`${item.imgUrl}`} ingredients={`${item.ingredients}`}/>
+                    ))}
+                </div>
             </div>
         </main>
     )
