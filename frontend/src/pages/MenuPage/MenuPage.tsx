@@ -18,7 +18,7 @@ type MenuItem = {
     name: string
     description: string
     ingredients: string
-    imgUrl: string
+    imgurl: string
 }
 
 export default function MenuPage(){
@@ -47,7 +47,7 @@ export default function MenuPage(){
                 <h1 className='menuHeaderText'>Menu Page</h1>
                 <div className='menuItemsContainer'>
                     {menuItems.map((item: MenuItem, index: number) => (
-                        <MenuItemCard key={index} name={`${item.name}`} desc={`${item.description}`} imgUrl={`${item.imgUrl}`} ingredients={`${item.ingredients}`}/>
+                        <MenuItemCard key={index} name={`${item.name}`} description={`${item.description}`} imgUrl={`${item.imgurl}`} ingredients={`${item.ingredients}`}/>
                     ))}
                 </div>
             </div>

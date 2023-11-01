@@ -6,8 +6,9 @@
     border: 2px solid $text-color;
     border-radius: 10px;
     height: 30vh;
-    width: 70vw;
+    width: 50vw;
     margin-top: 40px;
+    background-size: cover;
 }
 
 .menuItemFade{
@@ -15,7 +16,7 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-    background-color: rgba($color: black, $alpha: 0.5);
+    background-color: rgba($color: black, $alpha: 0.6);
     border-radius: 7px;
     @include flex-center;
 }
