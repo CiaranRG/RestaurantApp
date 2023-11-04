@@ -12,7 +12,6 @@ import ReservationsPage from './pages/ReservationsPage/ReservationsPage'
 import RegistrationPage from './pages/AccountPages/LoginAndRegistration/RegistrationPage'
 import LoginPage from './pages/AccountPages/LoginAndRegistration/LoginPage'
 import AboutUsPage from './pages/AboutUsPage/AboutUsPage'
-import GalleryPage from './pages/GalleryPage/GalleryPage'
 
 function App() {
 
@@ -23,7 +22,6 @@ function App() {
           <Route path='/' element={<Homepage/>}/>
           <Route path='/home' element={<Homepage/>}/>
           <Route path='/menu' element={<MenuPage/>}/>
-          <Route path='/gallery' element={<GalleryPage/>}/>
           <Route path='/aboutUs' element={<AboutUsPage/>}/>
           <Route path='/reservations' element={<ReservationsPage/>}/>
           <Route path='/registration' element={<RegistrationPage/>}/>

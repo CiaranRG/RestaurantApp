@@ -44,10 +44,10 @@ export default function MenuPage(){
     return(
         <main className='pageBackground'>
             <div className='pageWrapper'>
-                <h1 className='menuHeaderText'>Menu Page</h1>
+                <h1 className='menuHeaderText'>Check Out Our Menu Below!</h1>
                 <div className='menuItemsContainer'>
                     {menuItems.map((item: MenuItem, index: number) => (
-                        <MenuItemCard key={index} name={`${item.name}`} description={`${item.description}`} imgUrl={`${item.imgurl}`} ingredients={`${item.ingredients}`}/>
+                        <MenuItemCard key={index} name={`${item.name}`} description={`${item.description}`} imgUrl={`${item.imgurl}`} />
                     ))}
                 </div>
             </div>

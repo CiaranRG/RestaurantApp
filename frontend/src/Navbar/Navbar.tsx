@@ -1,7 +1,6 @@
 // import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import './Navbar.scss'
-import Button from '../Components/BookTable/Button'
 
 export default function Navbar(){
     // const navigate = useNavigate();
@@ -16,9 +15,6 @@ export default function Navbar(){
                 </Link>
                 <Link to='/menu'>
                     <a href="/menu">Menu</a>
-                </Link>
-                <Link to='/gallery'>
-                    <a href="/reservations">Gallery</a>
                 </Link>
                 <Link to='/aboutUs'>
                     <a href="/aboutUs">About Us</a>

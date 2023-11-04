@@ -7,7 +7,8 @@ type MenuItem = {
     imgUrl: string
 }
 
-export default function MenuItemCard({name, description, ingredients, imgUrl}: MenuItem){
+export default function MenuItemCard({name, description, imgUrl}: MenuItem){
+    console.log(description)
     
     return (
         <div className='menuItemWrapper' style={{backgroundImage: `url(${imgUrl})`}}>
@@ -15,8 +16,6 @@ export default function MenuItemCard({name, description, ingredients, imgUrl}: M
                 <main className='menuMainContent'>
                     <h1>{name}</h1>
                     <p>{description}</p>
-                    <h3>Ingredients</h3>
-                    <p>{ingredients} </p>
                 </main>
             </div>
         </div>
