@@ -7,7 +7,7 @@ export default function Navbar(){
     return(
         <nav>
             <div className='leftNav'>
-                <h2>Restaurant Name</h2>
+                <h2>BELLA CUCINA</h2>
             </div>
             <div className='centerNav'>
                 <Link to='/home'>

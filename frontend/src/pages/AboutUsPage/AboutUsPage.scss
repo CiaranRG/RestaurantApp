@@ -13,23 +13,47 @@
     flex-direction: column;
     align-items: center;
     font-size: 32px;
+    margin: 40px 0px 40px 0px;
 }
 
 .aboutCard{
-    margin: 20px;
-    margin-top: 20px;
+    margin: 40px 0px 0px 0px;
     border: 2px solid white;
     border-radius: 10px;
     padding: 10px;
     background-color: $color5;
+    min-width: 50%;
+    .aboutParagraph{
+        font-size: 24px;
+        font-weight: 700;
+        margin: 20px
+    }
+    .aboutHeader{
+        margin: 10px 0px 10px 0px;
+        padding: 0px 0px 20px 0px;
+    }
 }
 
-.aboutParagraph{
-    font-size: 24px;
-    font-weight: 700;
-    margin: 20px
-}
-
-.aboutHeader{
+.teammateCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
     margin: 10px;
+    padding: 0px 0px 20px 0px;
+    // border-bottom: 2px solid white;
+    .teammateText{
+        font-size: 16px;
+        font-weight: 700;
+    }
+    .teammateImg{
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 5px;
+        border: 2px solid white;
+    }
+    .teammateHeader{
+        font-size: 24px;
+    }
 }
