@@ -44,6 +44,7 @@ nav {
     a {
         @include removeUnderline;
         color: $text-color;
+        cursor: pointer;
     }
 }
 

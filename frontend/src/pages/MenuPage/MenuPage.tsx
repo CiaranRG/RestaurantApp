@@ -24,7 +24,7 @@ type MenuItem = {
 export default function MenuPage(){
     // Defining the state so it starts as an empty array 
     const [menuItems, setMenuItems] = useState<MenuItem[]>([])
-    useEffect(()=>{
+    useEffect(() => {
         document.title = 'Menu'
     },[])
     // Creating a useEffect to fetch the data from the backend

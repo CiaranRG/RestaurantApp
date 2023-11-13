@@ -1,10 +1,25 @@
-// import { useNavigate } from 'react-router-dom'
+import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import './Navbar.scss'
 
+// Importing our modal component and then the login/registration content that will go inside of it
+import LoginRegisterModal from '../Modals/LoginAndRegister/LoginAndRegister';
+import LoginPage from '../pages/AccountPages/LoginAndRegistration/LoginPage';
+import RegistrationPage from '../pages/AccountPages/LoginAndRegistration/RegistrationPage';
+
 export default function Navbar(){
-    // const navigate = useNavigate();
+
+    // Using state to track if the modal is open and what type of content is inside of it
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Creating a function for toggling the modal to be the opposite of what it Currently is
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen)
+        console.log(isModalOpen)
+    }
+    
     return(
+        <>
         <nav>
             <div className='leftNav'>
                 <h2>BELLA CUCINA</h2>
@@ -25,13 +40,12 @@ export default function Navbar(){
             </div>
             <div className='rightNav'>
                 {/* <a href="">My Account</a> */}
-                <Link to='/login'>
-                    <a href="">Login</a>
-                </Link>
-                <Link to='/registration'>
-                    <a href="">Register</a>
-                </Link>
+                <a onClick={toggleModal}>Login</a>
+                <a onClick={toggleModal}>Register</a>
             </div>
         </nav>
+        {/* Here we use our modal component and pass the isOpen and toggleModel function, whatever is between our component will be considered the children when passed through*/}
+        <LoginRegisterModal isOpen={isModalOpen} toggleModal={toggleModal}><LoginPage/></LoginRegisterModal>
+        </>
     )
 }

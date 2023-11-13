@@ -31,9 +31,15 @@ export default function LoginPage(){
         const { name, value } = evt.target;
         setLoginInfo(prevInfo => ({ ...prevInfo, [name]: value }));
     }
+
+    const handleModalClick = (evt: React.FormEvent<HTMLFormElement>) => {
+        // Prevents the click event from bubbling up to the modal overlay
+        evt.stopPropagation();
+    };
+
     return (
-        <main className='pageBackground'>
-            <div className='pageWrapper'>
+        <main>
+            <div onClick={handleModalClick}>
                 <h1 className='loginHeaderText'>Login Page</h1>
                 <h2 className='loginSubheaderText'>This is the subheader text for the login page</h2>
                 <div className='loginFormDiv'>
