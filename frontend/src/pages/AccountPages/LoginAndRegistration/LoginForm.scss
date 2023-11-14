@@ -1,0 +1,27 @@
+@import '../../../App.scss';
+
+.loginFormMainContent{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    @include flex-center;
+}
+
+.loginFormDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    border: 3px solid white;
+    font-size: 16px;
+}
+.loginForm{
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.loginHeaderText{
+    font-size: 4rem;
+}
