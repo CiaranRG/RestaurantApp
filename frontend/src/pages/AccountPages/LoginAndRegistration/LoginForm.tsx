@@ -1,7 +1,7 @@
 import Button from '../../../Components/BookTable/Button'
 import './LoginForm.scss'
 import axios from 'axios'
-import { useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 
 // Defining Types
 type LoginInfo = {
@@ -41,20 +41,19 @@ export default function LoginForm(){
         <main className='loginFormMainContent'>
             <div onClick={handleModalClick}>
                 <div className='loginFormDiv'>
-                <h1 className='loginHeaderText'>Login Page</h1>
-                <h2 className='loginSubheaderText'>This is the subheader text for the login page</h2>
+                <h1 className='loginHeaderText'>Login Here!</h1>
                     <form className='loginForm' action="" onSubmit={handleSubmit}>
                         <div className='loginFormRow'>
-                            <label htmlFor="">
+                            <label htmlFor="" className='loginUsernameLabel'>
                             Username:
                             </label>
-                            <input type="text" name='username' value={loginInfo.username} onChange={handleChange}/>
+                            <input type="text" name='username' className='loginUsernameInput' value={loginInfo.username} onChange={handleChange}/>
                         </div>
                         <div className='loginFormRow'>
-                            <label htmlFor="">
+                            <label htmlFor="" className='loginPasswordLabel'>
                             Password:
                             </label>
-                            <input type="password" name='password' value={loginInfo.password} onChange={handleChange}/>
+                            <input type="password" name='password' className='loginPasswordInput' value={loginInfo.password} onChange={handleChange}/>
                         </div>
                         <Button text='Login'/>
                     </form>

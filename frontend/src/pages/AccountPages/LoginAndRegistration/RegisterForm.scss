@@ -1,13 +1,13 @@
 @import '../../../App.scss';
 
-.loginFormMainContent{
+.registerFormMainContent{
     display: flex;
     height: 100vh;
     width: 100vw;
     @include flex-center;
 }
 
-.loginFormDiv{
+.registerFormDiv{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,7 +20,7 @@
     background-color: $color5;
 }
 
-.loginForm {
+.registerForm {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,14 +30,14 @@
     gap: 20px;
 }
 
-.loginHeaderText{
+.registerHeaderText{
     font-size: 4rem;
 }
 
-.loginFormRow{
+.registerFormRow{
     display: flex;
     flex-direction: column;
-    .loginPasswordInput, .loginEmailInput, .loginUsernameInput {
+    .registerPasswordInput, .registerEmailInput, .registerUsernameInput {
         border-radius: 5px;
         border: 2px solid white;
         height: 30px;
@@ -48,7 +48,8 @@
         box-shadow: 0px 0px 5px 1px black;
         color: $color1;
     }
-    .loginPasswordLabel, .loginEmailLabel, .loginUsernameLabel{
+    .registerPasswordLabel, .registerEmailLabel, .registerUsernameLabel{
         font-size: 32px;
+
     }
 }

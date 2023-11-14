@@ -9,8 +9,6 @@ import Footer from './Footer/Footer'
 import Homepage from './pages/Homepage/Homepage'
 import MenuPage from './pages/MenuPage/MenuPage'
 import ReservationsPage from './pages/ReservationsPage/ReservationsPage'
-import RegistrationPage from './pages/AccountPages/LoginAndRegistration/RegistrationPage'
-import LoginPage from './pages/AccountPages/LoginAndRegistration/LoginPage'
 import AboutUsPage from './pages/AboutUsPage/AboutUsPage'
 
 function App() {
@@ -24,8 +22,6 @@ function App() {
           <Route path='/menu' element={<MenuPage/>}/>
           <Route path='/aboutUs' element={<AboutUsPage/>}/>
           <Route path='/reservations' element={<ReservationsPage/>}/>
-          <Route path='/registration' element={<RegistrationPage/>}/>
-          <Route path='/login' element={<LoginPage/>}/>
         </Routes>
       <Footer/>
     </Router>

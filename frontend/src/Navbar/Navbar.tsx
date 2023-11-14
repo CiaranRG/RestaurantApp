@@ -5,7 +5,7 @@ import './Navbar.scss'
 // Importing our modal component and then the login/registration content that will go inside of it
 import LoginRegisterModal from '../Modals/LoginAndRegister/LoginAndRegister';
 import LoginForm from '../pages/AccountPages/LoginAndRegistration/LoginForm';
-import RegistrationPage from '../pages/AccountPages/LoginAndRegistration/RegistrationPage';
+import RegisterForm from '../pages/AccountPages/LoginAndRegistration/RegisterForm';
 
 export default function Navbar(){
 
@@ -59,7 +59,7 @@ export default function Navbar(){
         {modalContent === 'login' ? (
         <LoginRegisterModal isOpen={isModalOpen} toggleModal={toggleModal}><LoginForm/></LoginRegisterModal>
     ) : modalContent === 'register' ? (
-        <LoginRegisterModal isOpen={isModalOpen} toggleModal={toggleModal}><RegistrationPage/></LoginRegisterModal>
+        <LoginRegisterModal isOpen={isModalOpen} toggleModal={toggleModal}><RegisterForm/></LoginRegisterModal>
     ) : null}
         </>
     )
