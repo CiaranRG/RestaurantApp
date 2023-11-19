@@ -79,7 +79,7 @@ app.post('/api/accounts', (req, res) => {
     try {
         // Check for existence of the error property within this validation
         const { error } = registerSchema.validate(newAccount)
-        // Throw an error if validation fails to send us to the catch section
+        // Throw an error if validation fails (Error will be truthy) so we can be sent to the catch section or else it will just carry on and ignore this section
         if (error){
             throw new Error('Validation error')
         }

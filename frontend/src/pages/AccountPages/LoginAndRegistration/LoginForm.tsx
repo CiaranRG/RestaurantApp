@@ -1,7 +1,7 @@
 import Button from '../../../Components/BookTable/Button'
 import './LoginForm.scss'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // Defining Types
 type LoginInfo = {
@@ -11,9 +11,6 @@ type LoginInfo = {
 
 export default function LoginForm(){
     const [loginInfo, setLoginInfo] = useState<LoginInfo>({username: '', password: ''})
-    useEffect(()=>{
-        document.title = 'Login'
-    },[])
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
         try {
