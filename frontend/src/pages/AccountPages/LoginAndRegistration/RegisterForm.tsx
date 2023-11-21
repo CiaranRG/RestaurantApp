@@ -1,5 +1,6 @@
 import Button from '../../../Components/BookTable/Button'
 import './registerForm.scss'
+import ErrorMessage from '../../../Components/ErrorMessage/ErrorMessage'
 import axios, { AxiosError } from 'axios'
 import { useEffect, useState } from 'react'
 
@@ -17,10 +18,10 @@ export default function RegisterForm(){
     const [success, setSuccess] = useState({show: false, message: ''})
 
     useEffect(() => {
-        // If showError is true, set a timeout to hide the error after 3 seconds
+        // If showError is truthy do this and also set a timeout to hide the error display after 3 seconds
         if (error.show) {
             const timer = setTimeout(() => {
-                setError({show: true, message: 'Your inputs are invalid, try again!'});
+                setError({show: false, message: ''});
             }, 8000); // Telling the callback to run after 8 seconds
 
             // Setting up a cleanup function to run when the component unmounts, we pass a reference to the timer we want to clear
@@ -34,16 +35,18 @@ export default function RegisterForm(){
             const response = await axios.post('http://localhost:5000/api/accounts', registerInfo)
             setRegisterInfo({email: '', username: '', password: ''})
             console.log(response)
-            setShowError(false)
+            setError({show: false, message: ''})
         } catch (error) {
             // Using AxiosError to check if the error is an axios one or some other type of error, also checking to see if there is an error response for below
             if (axios.isAxiosError(error) && error.response){
                 // Checking if the error has data and message properties and if it does we put that in the error message to be used otherwise it will have a generic error message
-                if (error.response.data.error === 'Validation Error') {
-                    setErrorMessage('Your Inputs were not valid, please try again!');
+                if (error.response.data.error === 'Validation error') {
+                    setError({show: true, message: 'Your inputs were not valid, please try again!'})
+                    console.log(error)
                 } else {
                     // Setting another generic error if its not an axios error
-                    setErrorMessage('An Unexpected error occurred!')
+                    setError({show: true, message: 'An unexpected error has occurred'})
+                    console.log(error)
                 }
             }
         }
@@ -63,6 +66,7 @@ export default function RegisterForm(){
     return (
         <main className='registerFormMainContent'>
             <div onClick={handleModalClick}>
+            { error.show === true ? (<ErrorMessage message={error.message}/>) : <div></div>}
                 <div className='registerFormDiv'>
                 <h1 className='registerHeaderText'>Create Account</h1>
                 <h2 className='registerSubheaderText'>Use the form below to create your account!</h2>
