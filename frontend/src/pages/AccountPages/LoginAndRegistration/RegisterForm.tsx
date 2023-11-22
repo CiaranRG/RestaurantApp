@@ -34,7 +34,12 @@ export default function RegisterForm(){
         try {
             const response = await axios.post('http://localhost:5000/api/accounts', registerInfo)
             setRegisterInfo({email: '', username: '', password: ''})
-            console.log(response)
+            // Checking for a response and if the token is in the response 
+            if (response.data && response.data.token) {
+                // Saving the token to local storage inside an object with a key/value token/token
+                const token = response.data.token;
+                localStorage.setItem('token', token);
+            }
             setError({show: false, message: ''})
         } catch (error) {
             // Using AxiosError to check if the error is an axios one or some other type of error, also checking to see if there is an error response for below

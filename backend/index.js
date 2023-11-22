@@ -35,7 +35,6 @@ app.get('/api/menu', async (req, res) => {
         const result = await db.query('SELECT * FROM menuItems')
         res.json(result.rows);
     } catch (error) {
-        console.log('Error Occurred', error)
         res.status(500).json({error: 'An error has occurred'})
     }
 })
@@ -64,7 +63,6 @@ app.post('/api/reservations', async (req, res) => {
         );
         res.status(201).json(result.rows[0]);
     } catch(err) {
-        console.error(err);
         res.status(500).json({ error: "Database error" });
     }
 });
@@ -75,7 +73,6 @@ app.post('/api/login', (req, res) => {
 
 app.post('/api/accounts', (req, res) => {
     const newAccount = req.body
-    console.log(newAccount)
     try {
         // Check for existence of the error property within this validation
         const { error } = registerSchema.validate(newAccount)
@@ -84,13 +81,17 @@ app.post('/api/accounts', (req, res) => {
             throw new Error('Validation error')
         }
         const result = db.query(
-            'INSERT INTO user_accounts (username, email, password) VALUES ($1, $2, $3) RETURNING *',
+            // We are returning the id here so we can attach it to the json web token to send back
+            'INSERT INTO user_accounts (username, email, password) VALUES ($1, $2, $3) RETURNING id',
             [
                 newAccount.username,
                 newAccount.email,
                 newAccount.password
             ]
         )
+        const userId = result.rows[0].id
+        // Creating the json web token, also pulling the secret from our .env file and setting it to expire in 2 weeks
+        const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '2w' });
         res.status(201).json({message: 'Data Submitted'});
     } catch (err) {
         if (err.message === 'Validation error'){
