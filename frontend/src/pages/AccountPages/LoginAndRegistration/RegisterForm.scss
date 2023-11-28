@@ -14,7 +14,7 @@
     align-items: center;
     padding: 40px;
     border: 3px solid white;
-    border-radius: 10px;
+    border-radius: 2%;
     font-size: 16px;
     color: $color1;
     background-color: $color5;
@@ -40,13 +40,13 @@
     .registerPasswordInput, .registerEmailInput, .registerUsernameInput {
         border-radius: 5px;
         border: 2px solid white;
-        height: 30px;
+        height: 3vh;
         padding: 5px;
         font-size: 24px;
         margin-top: 10px;
-        background-color: $color5;
+        // background-color: $color5;
         box-shadow: 0px 0px 5px 1px black;
-        color: $color1;
+        // color: $color1;
     }
     .registerPasswordLabel, .registerEmailLabel, .registerUsernameLabel{
         font-size: 32px;

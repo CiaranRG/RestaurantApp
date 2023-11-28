@@ -23,7 +23,7 @@ export default function AboutUsPage(){
                             From the simmering sauces to the locally sourced produce, every plate is a celebration of culture, quality, and the joy of shared experiences.
                         </p>
                     </div>
-                    <div style={{display: 'flex', flexDirection: 'row', gap: '50px', justifyContent: 'space-evenly', maxWidth: '90vw', marginBottom: '20px'}}>
+                    <section style={{display: 'flex', flexDirection: 'row', gap: '50px', justifyContent: 'space-evenly', maxWidth: '90vw', marginBottom: '20px'}}>
                         <div className='aboutCard'>
                             <h2 className='aboutHeader'>Meet The Team</h2>
                             <div className='teammateCard'>
@@ -55,7 +55,7 @@ export default function AboutUsPage(){
                                 </div>
                             </div>
                         </div>
-                        <div className='aboutCard'>
+                        <section className='aboutCard'>
                             <h2 className='aboutHeader'>Section 2.1</h2>
                             <p className='aboutParagraph'> 
                             Nestled in the heart of the city, Bella Cucina began as a dream at a small farmer's market, where fresh, 
@@ -99,8 +99,8 @@ export default function AboutUsPage(){
                             Here at Bella Cucina, we believe that every dish should tell a story as rich and compelling as the flavors it carries. 
                             From the simmering sauces to the locally sourced produce, every plate is a celebration of culture, quality, and the joy of shared experiences.
                             </p>
-                        </div>
-                    </div>
+                        </section>
+                    </section>
                 </main>
             </div>
         </main>

@@ -1,9 +1,15 @@
 import express from 'express'
 import cors from 'cors'
 import { config } from 'dotenv';
+
+// Importing JWT
+import jwt from 'jsonwebtoken';
+const { sign, verify } = jwt;
+
 // Importing full pg package then destructing pool from it
 import pg  from 'pg'
 const { Pool } = pg
+
 // Calling this to have its side effects happen (reading the .env and parsing the data)
 config();
 const app = express()
@@ -71,8 +77,9 @@ app.post('/api/login', (req, res) => {
     
 })
 
-app.post('/api/accounts', (req, res) => {
+app.post('/api/accounts', async (req, res) => {
     const newAccount = req.body
+    console.log('this is the new account data', newAccount)
     try {
         // Check for existence of the error property within this validation
         const { error } = registerSchema.validate(newAccount)
@@ -80,7 +87,7 @@ app.post('/api/accounts', (req, res) => {
         if (error){
             throw new Error('Validation error')
         }
-        const result = db.query(
+        const result = await db.query(
             // We are returning the id here so we can attach it to the json web token to send back
             'INSERT INTO user_accounts (username, email, password) VALUES ($1, $2, $3) RETURNING id',
             [
@@ -89,10 +96,13 @@ app.post('/api/accounts', (req, res) => {
                 newAccount.password
             ]
         )
+        console.log('this is what is in result after db insertion', result)
         const userId = result.rows[0].id
+        console.log('this is what is in userId', userId)
         // Creating the json web token, also pulling the secret from our .env file and setting it to expire in 2 weeks
         const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '2w' });
-        res.status(201).json({message: 'Data Submitted'});
+        console.log('this is whats inside the token now', token)
+        res.status(201).json({message: 'Data Submitted', token: token });
     } catch (err) {
         if (err.message === 'Validation error'){
             console.error(err);
