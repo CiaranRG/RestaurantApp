@@ -9,7 +9,7 @@ type LoginInfo = {
     password: string;
 }
 
-export default function LoginForm(){
+export default function LoginForm({ onLogin, toggleModal }){
     const [loginInfo, setLoginInfo] = useState<LoginInfo>({username: '', password: ''})
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()

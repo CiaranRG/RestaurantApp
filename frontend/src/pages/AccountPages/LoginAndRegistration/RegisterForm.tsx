@@ -11,7 +11,7 @@ type RegisterInfo = {
     password: string;
 }
 
-export default function RegisterForm(){
+export default function RegisterForm({ toggleModal }){
     const [registerInfo, setRegisterInfo] = useState<RegisterInfo>({email: '', username: '', password: ''})
     // When setting state with just '' typescript infers that its a string, if you want to be explicit you can add <string> like you usually would.
     const [error, setError] = useState({show: false, message: ''})
@@ -29,6 +29,18 @@ export default function RegisterForm(){
         }
     }, [error.show]); // Adding the dependencies but making sure it only changes when the show property of the object changes
 
+    useEffect(() => {
+        // If showSuccess is truthy do this and also set a timeout to hide the error display after 3 seconds
+        if (success.show) {
+            const timer = setTimeout(() => {
+                setSuccess({show: false, message: ''});
+            }, 8000); // Telling the callback to run after 8 seconds
+
+            // Setting up a cleanup function to run when the component unmounts, we pass a reference to the timer we want to clear
+            return () => clearTimeout(timer);
+        }
+    }, [success.show]); // Adding the dependencies but making sure it only changes when the show property of the object changes
+    
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
         try {
@@ -39,8 +51,10 @@ export default function RegisterForm(){
                 // Saving the token to local storage inside an object with a key/value token/token
                 const token = response.data.token;
                 localStorage.setItem('token', token);
+                setSuccess({show: true, message: 'Your Account has Been Registered'})
             }
             setError({show: false, message: ''})
+            console.log(success.show, success.message)
         } catch (error) {
             // Using AxiosError to check if the error is an axios one or some other type of error, also checking to see if there is an error response for below
             if (axios.isAxiosError(error) && error.response){
@@ -72,6 +86,7 @@ export default function RegisterForm(){
         <main className='registerFormMainContent'>
             <div onClick={handleModalClick}>
             { error.show === true ? (<ErrorMessage message={error.message}/>) : <div></div>}
+            { success.show === true ? (<ErrorMessage message={success.message}/>) : <div></div>}
                 <div className='registerFormDiv'>
                 <h1 className='registerHeaderText'>Create Account</h1>
                 <h2 className='registerSubheaderText'>Use the form below to create your account!</h2>

@@ -7,7 +7,7 @@ import LoginRegisterModal from '../Modals/LoginAndRegister/LoginAndRegister';
 import LoginForm from '../pages/AccountPages/LoginAndRegistration/LoginForm';
 import RegisterForm from '../pages/AccountPages/LoginAndRegistration/RegisterForm';
 
-export default function Navbar(){
+export default function Navbar({isLoggedIn, onLogout, onLogin}){
 
     // Using state to track if the modal is open and what type of content is inside of it
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,7 +16,6 @@ export default function Navbar(){
     // Creating a function for toggling the modal to be the opposite of what it Currently is
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen)
-        console.log(isModalOpen)
     }
 
     // Making two more to set the content to be the one that was clicked below
@@ -49,17 +48,19 @@ export default function Navbar(){
                     <a href="/reservations" className='reservationBtn'>Reservations</a>
                 </Link> */}
             </div>
+            {/* Using a ternary operator to decide what to display based on login state */}
             <div className='rightNav'>
-                {/* <a href="">My Account</a> */}
-                <a onClick={toggleLoginModal}>Login</a>
-                <a onClick={toggleRegisterModal}>Register</a>
+                {/* If true this one shows, we also have a function being passed down from the app that will handle our logging out */}
+                { isLoggedIn === true ? (<><a href="">My Account</a> <a onClick={onLogout}>Logout</a></>) : 
+                // If False this one shows instead
+                (<> <a onClick={toggleLoginModal}>Login</a> <a onClick={toggleRegisterModal}>Register</a> </>)}
             </div>
         </nav>
         {/* Using a ternary operator to display the correct modal based on whats in modalContent, the children being passed in is the thing between the component (loginForm etc) */}
         {modalContent === 'login' ? (
-        <LoginRegisterModal isOpen={isModalOpen} toggleModal={toggleModal}><LoginForm/></LoginRegisterModal>
+        <LoginRegisterModal isOpen={isModalOpen} toggleModal={toggleModal}><LoginForm onLogin={onLogin} toggleModal={toggleModal}/></LoginRegisterModal>
     ) : modalContent === 'register' ? (
-        <LoginRegisterModal isOpen={isModalOpen} toggleModal={toggleModal}><RegisterForm/></LoginRegisterModal>
+        <LoginRegisterModal isOpen={isModalOpen} toggleModal={toggleModal}><RegisterForm toggleModal={toggleModal}/></LoginRegisterModal>
     ) : null}
         </>
     )

@@ -98,11 +98,9 @@ app.post('/api/accounts', async (req, res) => {
         )
         console.log('this is what is in result after db insertion', result)
         const userId = result.rows[0].id
-        console.log('this is what is in userId', userId)
         // Creating the json web token, also pulling the secret from our .env file and setting it to expire in 2 weeks
         const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '2w' });
-        console.log('this is whats inside the token now', token)
-        res.status(201).json({message: 'Data Submitted', token: token });
+        res.status(201).json({message: 'Data Submitted', jwt: token });
     } catch (err) {
         if (err.message === 'Validation error'){
             console.error(err);
