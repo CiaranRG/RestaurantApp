@@ -19,7 +19,7 @@ export default function LoginForm({ onLogin, toggleModal }: LoginProps){
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
         try {
-            const response = await axios.post('http://localhost:5000/api/login', loginInfo)
+            const response = await axios.post('http://localhost:5000/api/accounts/login', loginInfo)
             setLoginInfo({username: '', password: ''})
         } catch (error) {
             console.log(error)

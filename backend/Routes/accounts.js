@@ -6,7 +6,8 @@ import db from '../utils/databaseConnection.js'
 
 const router = express.Router();
 
-router.post('/api/accounts', async (req, res) => {
+// Post route for creating accounts
+router.post('/', async (req, res) => {
     const newAccount = req.body
     try {
         // Check for existence of the error property within this validation
@@ -24,7 +25,6 @@ router.post('/api/accounts', async (req, res) => {
                 newAccount.password
             ]
         )
-        console.log('this is what is in result after db insertion', result)
         const userId = result.rows[0].id
         // Creating the json web token, also pulling the secret from our .env file and setting it to expire in 2 weeks
         const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '2w' });
@@ -37,6 +37,23 @@ router.post('/api/accounts', async (req, res) => {
             console.error(err);
             res.status(500).json({ error: "Database error" });
         }
+    }
+})
+
+// Post route for logging in accounts
+app.post('/login', async (req, res) => {
+    const loginAccount = req.body
+    console.log(loginAccount)
+    try {
+        // Check for existence of the error property within this validation
+        const { error } = loginSchema.validate(loginAccount)
+        if (error){
+            throw new Error('Validation error')
+        }
+        const result = await db.query(`SELECT `)
+    } catch (error) {
+
+
     }
 })
 

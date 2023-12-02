@@ -28,18 +28,6 @@ export default function RegisterForm({ toggleModal }){
             return () => clearTimeout(timer);
         }
     }, [error.show]); // Adding the dependencies but making sure it only changes when the show property of the object changes
-
-    // useEffect(() => {
-    //     // If showSuccess is truthy do this and also set a timeout to hide the error display after 3 seconds
-    //     if (success.show) {
-    //         const timer = setTimeout(() => {
-    //             setSuccess({show: false, message: ''});
-    //         }, 8000); // Telling the callback to run after 8 seconds
-
-    //         // Setting up a cleanup function to run when the component unmounts, we pass a reference to the timer we want to clear
-    //         return () => clearTimeout(timer);
-    //     }
-    // }, [success.show]); // Adding the dependencies but making sure it only changes when the show property of the object changes
     
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
