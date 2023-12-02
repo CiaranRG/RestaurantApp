@@ -13,6 +13,7 @@ import ReservationsPage from './pages/ReservationsPage/ReservationsPage'
 import AboutUsPage from './pages/AboutUsPage/AboutUsPage'
 
 function App() {
+  // We use the !! to convert to a boolean and we then decide if the boolean is true or false based on the truthy/falsy value inside it currently (If theres something inside its truthy)
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('jwt'));
 
   // Creating a function to handle login and logout

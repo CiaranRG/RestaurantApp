@@ -9,13 +9,17 @@ type LoginInfo = {
     password: string;
 }
 
-export default function LoginForm({ onLogin, toggleModal }){
+type LoginProps = {
+    onLogin: (token: string) => void;
+    toggleModal: () => void;
+}
+
+export default function LoginForm({ onLogin, toggleModal }: LoginProps){
     const [loginInfo, setLoginInfo] = useState<LoginInfo>({username: '', password: ''})
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
         try {
             const response = await axios.post('http://localhost:5000/api/login', loginInfo)
-            console.log(response)
             setLoginInfo({username: '', password: ''})
         } catch (error) {
             console.log(error)

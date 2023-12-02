@@ -29,17 +29,17 @@ export default function RegisterForm({ toggleModal }){
         }
     }, [error.show]); // Adding the dependencies but making sure it only changes when the show property of the object changes
 
-    useEffect(() => {
-        // If showSuccess is truthy do this and also set a timeout to hide the error display after 3 seconds
-        if (success.show) {
-            const timer = setTimeout(() => {
-                setSuccess({show: false, message: ''});
-            }, 8000); // Telling the callback to run after 8 seconds
+    // useEffect(() => {
+    //     // If showSuccess is truthy do this and also set a timeout to hide the error display after 3 seconds
+    //     if (success.show) {
+    //         const timer = setTimeout(() => {
+    //             setSuccess({show: false, message: ''});
+    //         }, 8000); // Telling the callback to run after 8 seconds
 
-            // Setting up a cleanup function to run when the component unmounts, we pass a reference to the timer we want to clear
-            return () => clearTimeout(timer);
-        }
-    }, [success.show]); // Adding the dependencies but making sure it only changes when the show property of the object changes
+    //         // Setting up a cleanup function to run when the component unmounts, we pass a reference to the timer we want to clear
+    //         return () => clearTimeout(timer);
+    //     }
+    // }, [success.show]); // Adding the dependencies but making sure it only changes when the show property of the object changes
     
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
@@ -85,8 +85,7 @@ export default function RegisterForm({ toggleModal }){
     return (
         <main className='registerFormMainContent'>
             <div onClick={handleModalClick}>
-            { error.show === true ? (<ErrorMessage message={error.message}/>) : <div></div>}
-            { success.show === true ? (<ErrorMessage message={success.message}/>) : <div></div>}
+            { error.show === true ? (<ErrorMessage message={error.message}/>) : success.show === true ? (<ErrorMessage message={success.message}/>) : <div></div>}
                 <div className='registerFormDiv'>
                 <h1 className='registerHeaderText'>Create Account</h1>
                 <h2 className='registerSubheaderText'>Use the form below to create your account!</h2>

@@ -7,7 +7,13 @@ import LoginRegisterModal from '../Modals/LoginAndRegister/LoginAndRegister';
 import LoginForm from '../pages/AccountPages/LoginAndRegistration/LoginForm';
 import RegisterForm from '../pages/AccountPages/LoginAndRegistration/RegisterForm';
 
-export default function Navbar({isLoggedIn, onLogout, onLogin}){
+type NavbarProps = {
+    isLoggedIn: boolean;
+    onLogout: () => void;
+    onLogin: (token: string) => void;
+  }
+
+export default function Navbar({isLoggedIn, onLogout, onLogin}: NavbarProps){
 
     // Using state to track if the modal is open and what type of content is inside of it
     const [isModalOpen, setIsModalOpen] = useState(false);

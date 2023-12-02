@@ -2,34 +2,31 @@ import express from 'express'
 import cors from 'cors'
 import { config } from 'dotenv';
 
+import db from './utils/databaseConnection.js'
+
 // Importing JWT
 import jwt from 'jsonwebtoken';
 const { sign, verify } = jwt;
 
-// Importing full pg package then destructing pool from it
-import pg  from 'pg'
-const { Pool } = pg
-
 // Calling this to have its side effects happen (reading the .env and parsing the data)
 config();
+
 const app = express()
 const PORT = 5000
 
+// Importing our routes
+import { accountRoutes } from './Routes/accounts.js'
+
+// Telling my app to use this file for requests to /api/accounts
+app.use('/api/accounts', accountRoutes);
+
 // Importing joi schemas
 import { registerSchema } from './models/accountsModel.js';
+import { loginSchema } from './models/accountsModel.js';
 
 // Add options later to limit who can send requests
 app.use(cors());
 app.use(express.json());
-
-// Creating postgreSQL connection
-const db = new Pool({
-  user: process.env.PG_USER,
-  host: 'localhost',
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASS,
-  port: 5432, // Default port for PostgreSQL
-});
 
 // Using this to send information to the react frontend when we get this request
 app.get('/api', (req, res) => {
@@ -73,42 +70,19 @@ app.post('/api/reservations', async (req, res) => {
     }
 });
 
-app.post('/api/login', (req, res) => {
-    
-})
-
-app.post('/api/accounts', async (req, res) => {
-    const newAccount = req.body
-    console.log('this is the new account data', newAccount)
+app.post('/api/login', async (req, res) => {
+    const loginAccount = req.body
+    console.log(loginAccount)
     try {
         // Check for existence of the error property within this validation
-        const { error } = registerSchema.validate(newAccount)
-        // Throw an error if validation fails (Error will be truthy) so we can be sent to the catch section or else it will just carry on and ignore this section
+        const { error } = loginSchema.validate(loginAccount)
         if (error){
             throw new Error('Validation error')
         }
-        const result = await db.query(
-            // We are returning the id here so we can attach it to the json web token to send back
-            'INSERT INTO user_accounts (username, email, password) VALUES ($1, $2, $3) RETURNING id',
-            [
-                newAccount.username,
-                newAccount.email,
-                newAccount.password
-            ]
-        )
-        console.log('this is what is in result after db insertion', result)
-        const userId = result.rows[0].id
-        // Creating the json web token, also pulling the secret from our .env file and setting it to expire in 2 weeks
-        const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '2w' });
-        res.status(201).json({message: 'Data Submitted', jwt: token });
-    } catch (err) {
-        if (err.message === 'Validation error'){
-            console.error(err);
-            res.status(400).json({ error: "Validation error", details: err.details, message: 'This is a validation error'});
-        } else {
-            console.error(err);
-            res.status(500).json({ error: "Database error" });
-        }
+        const result = await db.query(`SELECT `)
+    } catch (error) {
+
+
     }
 })
 
