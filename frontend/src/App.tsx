@@ -18,12 +18,14 @@ function App() {
 
   // Creating a function to handle login and logout
   const handleLogin = (token: string) => {
-    localStorage.setItem('jwt', token);
-    setIsLoggedIn(true);
+    // Document.cookie attaches all the cookies together separated by a ; and so we use split to create an array which contains all the cookies, we then look specifically for the jsonWebToken.
+    const jwtCookie = document.cookie.split('; ').find(row => row.startsWith('jwt='));
+    // Using the !! to convert it to a boolean and the value of the boolean is going to be based on if the current value in jwtCookie is truthy or falsy
+    setIsLoggedIn(!!jwtCookie);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('jwt');
+    document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     setIsLoggedIn(false);
   };
 

@@ -42,8 +42,10 @@ export default function RegisterForm({ toggleModal }){
                 setSuccess({show: true, message: 'Your Account has Been Registered'})
             }
             setError({show: false, message: ''})
+            toggleModal()
             console.log(success.show, success.message)
         } catch (error) {
+            console.log('We hit the error somehow', error)
             // Using AxiosError to check if the error is an axios one or some other type of error, also checking to see if there is an error response for below
             if (axios.isAxiosError(error) && error.response){
                 // Checking if the error has data and message properties and if it does we put that in the error message to be used otherwise it will have a generic error message
@@ -86,7 +88,7 @@ export default function RegisterForm({ toggleModal }){
                         </div>
                         <div className='registerFormRow'>
                             <label htmlFor="" className='registerUsernameLabel'>
-                            Username: (3-30 Characters)
+                            Username: (3-30 Characters, No Spaces)
                             </label>
                             <input type="text" name='username' className='registerUsernameInput' value={registerInfo.username} onChange={handleChange}/>
                         </div>

@@ -95,7 +95,7 @@ export default function BookTableForm(){
                 </div>
                 <div className="formRow">
                     <label>
-                        Special Requests:
+                        Special Requests: (Character Limit)
                         <textarea name="specialRequest" required maxLength={50} value={formInfo.specialRequest} onChange={handleChange}></textarea>
                     </label>
                 </div>

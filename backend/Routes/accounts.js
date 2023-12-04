@@ -25,10 +25,7 @@ router.post('/', async (req, res) => {
                 newAccount.password
             ]
         )
-        const userId = result.rows[0].id
-        // Creating the json web token, also pulling the secret from our .env file and setting it to expire in 2 weeks
-        const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '2w' });
-        res.status(201).json({message: 'Data Submitted', jwt: token });
+        res.status(201).json({message: 'Data Submitted'});
     } catch (err) {
         if (err.message === 'Validation error'){
             console.error(err);
@@ -41,19 +38,51 @@ router.post('/', async (req, res) => {
 })
 
 // Post route for logging in accounts
-app.post('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
     const loginAccount = req.body
-    console.log(loginAccount)
     try {
+        console.log(loginAccount)
         // Check for existence of the error property within this validation
         const { error } = loginSchema.validate(loginAccount)
+        
         if (error){
             throw new Error('Validation error')
         }
-        const result = await db.query(`SELECT `)
+
+        // Query the database for the users information
+        const result = await db.query('SELECT * FROM user_accounts WHERE username = $1 AND password = $2', [
+            loginAccount.username,
+            loginAccount.password
+        ]);
+        if (result.rows.length > 0) {
+            const userId = result.rows[0].id
+            // Creating the json web token that has the userId in it, also pulling the secret from our .env file and setting it to expire in 2 weeks
+            const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '2w' });
+            // Passing the token we created into here so we can then add the cookie to the response headers
+            res.cookie('jwt', token, {
+                // Setting httpOnly to true so it can help prevent XSS attacks through javascript interaction
+                httpOnly: true,
+                // When we start the app or when its hosting on a site the environment will be set to production which will make the secure option true, which allows only https requests
+                secure: process.env.NODE_ENV === 'production',
+                // 
+                sameSite: 'Strict', // Adjust according to your needs
+                maxAge: 14 * 24 * 60 * 60 * 1000, // 2 weeks in milliseconds
+                path: '/',
+            });
+            res.status(201).json({message: 'User Was Found', token })
+        } else {
+            console.log('We could not find that user')
+            throw new Error("Invalid Credentials")
+        }
+
     } catch (error) {
-
-
+        // CUsing instanceof to check if it was a database error to 
+        if (error.message === 'Invalid Credentials') {
+            res.status(401).json({ error: error, message: "Invalid credentials, please try again!" });
+        } else {
+            // Giving a generic error in any other case currently
+            res.status(401).json({ error: error, message: "An unexpected error occurred!" });
+        }
     }
 })
 

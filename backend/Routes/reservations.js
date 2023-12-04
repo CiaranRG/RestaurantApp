@@ -5,7 +5,7 @@ import db from '../utils/databaseConnection.js'
 const router = express.Router();
 
 // Create a new reservation
-app.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     const newReservation = req.body;
     console.log(newReservation)
     try {
@@ -32,7 +32,7 @@ app.post('/', async (req, res) => {
     }
 });
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.json(reservations);
 });
 

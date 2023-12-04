@@ -16,13 +16,28 @@ type LoginProps = {
 
 export default function LoginForm({ onLogin, toggleModal }: LoginProps){
     const [loginInfo, setLoginInfo] = useState<LoginInfo>({username: '', password: ''})
+    const [error, setError] = useState({show: false, message: ''})
+
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
         try {
-            const response = await axios.post('http://localhost:5000/api/accounts/login', loginInfo)
+            // Need to add the option withCredentials for axios to accept the cookie since we have our front and backends on different origins
+            const response = await axios.post('http://localhost:5000/api/accounts/login', loginInfo, { withCredentials: true })
+            const token = onLogin(response.data.token)
+            toggleModal()
             setLoginInfo({username: '', password: ''})
         } catch (error) {
-            console.log(error)
+            if (axios.isAxiosError(error) && error.response){
+                // Checking if the error has data and message properties and if it does we put that in the error message to be used otherwise it will have a generic error message
+                if (error.response.data.error === 'Invalid Credentials') {
+                    setError({show: true, message: 'Your inputs were not valid, please try again!'})
+                    console.log(error)
+                } else {
+                    // Setting another generic error if its not an axios error
+                    setError({show: true, message: 'An unexpected error has occurred'})
+                    console.log(error)
+                }
+            }
         }
 
     }
