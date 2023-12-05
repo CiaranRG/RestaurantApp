@@ -10,7 +10,7 @@ import RegisterForm from '../pages/AccountPages/LoginAndRegistration/RegisterFor
 type NavbarProps = {
     isLoggedIn: boolean;
     onLogout: () => void;
-    onLogin: (token: string) => void;
+    onLogin: () => void;
   }
 
 export default function Navbar({isLoggedIn, onLogout, onLogin}: NavbarProps){

@@ -8,22 +8,22 @@ type LoginInfo = {
     username: string;
     password: string;
 }
-
 type LoginProps = {
-    onLogin: (token: string) => void;
+    onLogin: () => void;
     toggleModal: () => void;
 }
 
 export default function LoginForm({ onLogin, toggleModal }: LoginProps){
     const [loginInfo, setLoginInfo] = useState<LoginInfo>({username: '', password: ''})
     const [error, setError] = useState({show: false, message: ''})
-
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
         try {
             // Need to add the option withCredentials for axios to accept the cookie since we have our front and backends on different origins
             const response = await axios.post('http://localhost:5000/api/accounts/login', loginInfo, { withCredentials: true })
-            const token = onLogin(response.data.token)
+            // const token = onLogin()
+            console.log(response)
+            onLogin()
             toggleModal()
             setLoginInfo({username: '', password: ''})
         } catch (error) {

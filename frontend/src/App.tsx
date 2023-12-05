@@ -17,11 +17,9 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('jwt'));
 
   // Creating a function to handle login and logout
-  const handleLogin = (token: string) => {
-    // Document.cookie attaches all the cookies together separated by a ; and so we use split to create an array which contains all the cookies, we then look specifically for the jsonWebToken.
-    const jwtCookie = document.cookie.split('; ').find(row => row.startsWith('jwt='));
-    // Using the !! to convert it to a boolean and the value of the boolean is going to be based on if the current value in jwtCookie is truthy or falsy
-    setIsLoggedIn(!!jwtCookie);
+  const handleLogin = () => {
+    // With the way we have it setup this function will only run if the person successfully logs in and there is no other way this function runs otherwise
+    setIsLoggedIn(true);
   };
 
   const handleLogout = () => {
