@@ -23,8 +23,11 @@ function App() {
   };
 
   const handleLogout = () => {
+    console.log('Logging out...');
     document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    console.log('Cookie cleared.');
     setIsLoggedIn(false);
+    console.log('isLoggedIn set to false.');
   };
 
   return (

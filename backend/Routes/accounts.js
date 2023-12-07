@@ -75,13 +75,15 @@ router.post('/login', async (req, res) => {
             throw new Error("Invalid Credentials")
         }
 
-    } catch (error) {
+    } catch (err) {
         // CUsing instanceof to check if it was a database error to 
-        if (error.message === 'Invalid Credentials') {
-            res.status(401).json({ error: error, message: "Invalid credentials, please try again!" });
+        if (err.message === 'Invalid Credentials') {
+            res.status(401).json({ error: 'Invalid Credentials', details: err.details});
         } else {
             // Giving a generic error in any other case currently
-            res.status(401).json({ error: error, message: "An unexpected error occurred!" });
+            console.log(err)
+            console.log(err.message)
+            res.status(401).json({ error: 'Unknown Error'});
         }
     }
 })

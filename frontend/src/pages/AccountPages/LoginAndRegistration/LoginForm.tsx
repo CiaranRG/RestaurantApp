@@ -1,7 +1,8 @@
 import Button from '../../../Components/BookTable/Button'
 import './LoginForm.scss'
 import axios from 'axios'
-import { useState } from 'react'
+import ErrorMessage from '../../../Components/ErrorMessage/ErrorMessage'
+import { useState, useEffect} from 'react'
 
 // Defining Types
 type LoginInfo = {
@@ -16,6 +17,20 @@ type LoginProps = {
 export default function LoginForm({ onLogin, toggleModal }: LoginProps){
     const [loginInfo, setLoginInfo] = useState<LoginInfo>({username: '', password: ''})
     const [error, setError] = useState({show: false, message: ''})
+    const [success, setSuccess] = useState({show: false, message: ''})
+
+    useEffect(() => {
+        // If showError is truthy do this and also set a timeout to hide the error display after 3 seconds
+        if (error.show) {
+            const timer = setTimeout(() => {
+                setError({show: false, message: ''});
+            }, 8000); // Telling the callback to run after 8 seconds
+
+            // Setting up a cleanup function to run when the component unmounts, we pass a reference to the timer we want to clear
+            return () => clearTimeout(timer);
+        }
+    }, [error.show]); // Adding the dependencies but making sure it only changes when the show property of the object changes
+
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
         try {
@@ -26,16 +41,18 @@ export default function LoginForm({ onLogin, toggleModal }: LoginProps){
             onLogin()
             toggleModal()
             setLoginInfo({username: '', password: ''})
-        } catch (error) {
-            if (axios.isAxiosError(error) && error.response){
+        } catch (err) {
+            if (axios.isAxiosError(err) && err.response){
                 // Checking if the error has data and message properties and if it does we put that in the error message to be used otherwise it will have a generic error message
-                if (error.response.data.error === 'Invalid Credentials') {
-                    setError({show: true, message: 'Your inputs were not valid, please try again!'})
+                if (err.response.data.error === 'Invalid Credentials') {
+                    setError({show: true, message: "That user doesn't exist!"})
+                    console.log(error)
+                } else if (err.response.data.error === 'Validation Error') {
+                    setError({show: true, message: 'There is an error with your input, try again!'})
                     console.log(error)
                 } else {
-                    // Setting another generic error if its not an axios error
                     setError({show: true, message: 'An unexpected error has occurred'})
-                    console.log(error)
+                    console.log(err)
                 }
             }
         }
@@ -56,6 +73,7 @@ export default function LoginForm({ onLogin, toggleModal }: LoginProps){
     return (
         <main className='loginFormMainContent'>
             <div onClick={handleModalClick}>
+            { error.show === true ? (<ErrorMessage message={error.message}/>) : <div></div>}
                 <div className='loginFormDiv'>
                 <h1 className='loginHeaderText'>Login Here!</h1>
                     <form className='loginForm' action="" onSubmit={handleSubmit}>
