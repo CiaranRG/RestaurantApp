@@ -1,4 +1,4 @@
-import Button from '../../../Components/BookTable/Button'
+import Button from '../../../Components/Button/Button'
 import './registerForm.scss'
 import ErrorMessage from '../../../Components/ErrorMessage/ErrorMessage'
 import axios, { AxiosError } from 'axios'

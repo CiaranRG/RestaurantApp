@@ -24,7 +24,7 @@ nav {
 }
 
 .centerNav{
-    width: 33vw;
+    width: 33%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,7 +40,7 @@ nav {
     @include sideNavs;
     justify-content: flex-end;
     padding: 0px 30px 0px 0px;
-    width: 33vw;
+    width: 33%;
     a {
         @include removeUnderline;
         color: $text-color;

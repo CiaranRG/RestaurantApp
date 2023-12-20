@@ -1,5 +1,5 @@
 import './Homepage.scss'
-import Button from '../../Components/BookTable/Button'
+import Button from '../../Components/Button/Button'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 

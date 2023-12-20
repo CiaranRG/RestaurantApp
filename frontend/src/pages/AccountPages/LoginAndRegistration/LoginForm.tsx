@@ -1,4 +1,4 @@
-import Button from '../../../Components/BookTable/Button'
+import Button from '../../../Components/Button/Button'
 import './LoginForm.scss'
 import axios from 'axios'
 import ErrorMessage from '../../../Components/ErrorMessage/ErrorMessage'
@@ -17,7 +17,6 @@ type LoginProps = {
 export default function LoginForm({ onLogin, toggleModal }: LoginProps){
     const [loginInfo, setLoginInfo] = useState<LoginInfo>({username: '', password: ''})
     const [error, setError] = useState({show: false, message: ''})
-    const [success, setSuccess] = useState({show: false, message: ''})
 
     useEffect(() => {
         // If showError is truthy do this and also set a timeout to hide the error display after 3 seconds
@@ -37,7 +36,6 @@ export default function LoginForm({ onLogin, toggleModal }: LoginProps){
             // Need to add the option withCredentials for axios to accept the cookie since we have our front and backends on different origins
             const response = await axios.post('http://localhost:5000/api/accounts/login', loginInfo, { withCredentials: true })
             // const token = onLogin()
-            console.log(response)
             onLogin()
             toggleModal()
             setLoginInfo({username: '', password: ''})
@@ -48,7 +46,7 @@ export default function LoginForm({ onLogin, toggleModal }: LoginProps){
                     setError({show: true, message: "That user doesn't exist!"})
                     console.log(error)
                 } else if (err.response.data.error === 'Validation Error') {
-                    setError({show: true, message: 'There is an error with your input, try again!'})
+                    setError({show: true, message: 'Your inputs are invalid, try again!'})
                     console.log(error)
                 } else {
                     setError({show: true, message: 'An unexpected error has occurred'})
@@ -65,7 +63,7 @@ export default function LoginForm({ onLogin, toggleModal }: LoginProps){
         setLoginInfo(prevInfo => ({ ...prevInfo, [name]: value }));
     }
 
-    const handleModalClick = (evt: React.FormEvent<HTMLFormElement>) => {
+    const handleModalClick = (evt: React.MouseEvent<HTMLDivElement>) => {
         // Prevents the click event from bubbling up to the modal overlay
         evt.stopPropagation();
     };

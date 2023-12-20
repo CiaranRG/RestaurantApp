@@ -8,7 +8,6 @@ type MenuItem = {
 }
 
 export default function MenuItemCard({name, description, imgUrl}: MenuItem){
-    console.log(description)
     
     return (
         <div className='menuItemWrapper' style={{backgroundImage: `url(${imgUrl})`}}>

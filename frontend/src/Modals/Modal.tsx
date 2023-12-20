@@ -1,4 +1,4 @@
-import './LoginAndRegister.scss'; 
+import './Modal.scss'; 
 
 // Setting up types for the modal
 type Modal = {
@@ -8,7 +8,7 @@ type Modal = {
   children: React.ReactNode;
 }
 
-export default function LoginRegisterModal({isOpen, toggleModal, children}: Modal){
+export default function Modal({isOpen, toggleModal, children}: Modal){
    // Using a ternary operator to change the class stored in modalClass to be left if true and right if false
    const modalClass = isOpen ? "modalOverlay show" : "modalOverlay";
 

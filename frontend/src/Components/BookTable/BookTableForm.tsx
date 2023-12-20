@@ -1,6 +1,6 @@
 import { useState } from "react";
 import './BookTableForm.scss'
-import Button from "./Button";
+import Button from "../Button/Button";
 import axios from 'axios'
 
 // Defining the form types
@@ -16,7 +16,11 @@ type FormInfo = {
    termsConditions: boolean
 }
 
-export default function BookTableForm(){
+type BookTableFormProps = {
+    toggleModal: () => void
+}
+
+export default function BookTableForm({toggleModal}: BookTableFormProps){
     // Defining the state and filling in blanks for initial values
     const [formInfo, setFormInfo] = useState<FormInfo>({
         firstName: '', lastName: '', email: '', phoneNumber: '', bookingDate: '', bookingTime: '', specialRequest: '', numOfSeats: 1, termsConditions: false
@@ -47,8 +51,13 @@ export default function BookTableForm(){
         }
     }
 
+    const handleModalClick = (evt: React.MouseEvent<HTMLDivElement>) => {
+        // Prevents the click event from bubbling up to the modal overlay
+        evt.stopPropagation();
+    };
+
     return(
-        <div className="bookTableFormDiv">
+        <div className="bookTableFormDiv" onClick={handleModalClick}>
             <form action="" className="bookTableForm" onSubmit={handleSubmit}>
                 <div className="formRow">
                     <label>

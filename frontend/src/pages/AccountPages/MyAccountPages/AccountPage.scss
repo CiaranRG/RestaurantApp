@@ -1,0 +1,17 @@
+@import '../../../App.scss';
+
+.accountHeaderText {
+    font-size: 8rem;
+}
+
+.accountSubHeaderText {
+    font-size: 5rem;
+}
+
+
+.accountButtonsDiv{
+    display: flex;
+    width: 100%;
+    @include flex-center;
+    gap: 2rem;
+}
