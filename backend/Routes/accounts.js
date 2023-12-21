@@ -3,18 +3,38 @@ import express from 'express';
 import { registerSchema, loginSchema } from '../models/accountsModel.js';
 import jwt from 'jsonwebtoken';
 import db from '../utils/databaseConnection.js'
+import { config } from 'dotenv';
 
 const router = express.Router();
 
-router.post('/isLoggedIn', (req, res) => {
+// Calling config to have the .env work
+config()
+
+router.post('/isLoggedIn', async (req, res) => {
     // Grabbing the cookie from the browser
     const jwtCookie = req.cookies.jwt;
-    console.log(jwtCookie)
     // Using this to check if there was anything in the jwtCookie and if there is nothing it means there is no cookie which signifies there is no logged in user.
     if (!jwtCookie){
+        // Returning this if there is no cookie
         return res.json({isLoggedIn: false})
     }
-    res.json({isLoggedIn: true})
+    try {
+        // Decoding the JWT using verify and passing in the token then the secret we used to create the tokens
+        const decodedJwt = jwt.verify(jwtCookie, process.env.JWT_SECRET)
+        if (!decodedJwt.userId){
+            return res.json({isLoggedIn: false})
+        }
+        const result = await db.query('SELECT id FROM user_accounts WHERE id = $1', [decodedJwt.userId])
+        if (result.rows.length === 0 ){
+            console.log('Inside rows check')
+            return res.json({isLoggedIn: false})
+        }
+        res.json({isLoggedIn: true})
+    } catch (err) {
+        console.log('An error has occurred')
+        console.log(err)
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 })
 
 // Post route for logging in accounts

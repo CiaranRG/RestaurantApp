@@ -4,10 +4,6 @@ import { config } from 'dotenv';
 
 import db from './utils/databaseConnection.js'
 
-// Importing JWT
-import jwt from 'jsonwebtoken';
-const { sign, verify } = jwt;
-
 // Calling this to have its side effects happen (reading the .env and parsing the data)
 config();
 
