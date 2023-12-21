@@ -3,8 +3,8 @@
 
 // Main CSS
 nav {
-    background-color: grey;
-    background-color: $color5;
+    // Can use this type of linear gradient setup to blend colors into each other at certain percentages, I have not done that here
+    background: linear-gradient(90deg , $color6 30%, $color6 34%, $color6 51%, $color6 68%, $color6 70%);
     font-family: $font-stack;
     height: $nav-height;
     display: flex;

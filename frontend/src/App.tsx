@@ -19,7 +19,7 @@ import loginCheck from './utils/loginCheck'
 
 function App() {
   // We use the !! to convert to a boolean and we then decide if the boolean is true or false based on the truthy/falsy value inside it currently (If theres something inside its truthy)
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('jwt'));
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Creating a function to handle login and logout
   const handleLogin = () => {
@@ -42,10 +42,18 @@ function App() {
   };
 
   useEffect(() => {
+    console.log('Entering use effect')
     const checkLogin = async () => {
+      console.log('Checking Login Status')
       try {
-        const loggedIn = await loginCheck()
-        console.log(loggedIn, 'Is Logged in') 
+        const isLoggedIn = await loginCheck()
+        console.log('Passed Login Check')
+        console.log(isLoggedIn)
+        if (!isLoggedIn){
+          setIsLoggedIn(false)
+        } else {
+          setIsLoggedIn(true)
+        }
       } catch (err) {
         console.log(err)
       }

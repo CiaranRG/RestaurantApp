@@ -3,9 +3,19 @@ import express from 'express';
 import { registerSchema, loginSchema } from '../models/accountsModel.js';
 import jwt from 'jsonwebtoken';
 import db from '../utils/databaseConnection.js'
-import Cookies from 'js-cookie'
 
 const router = express.Router();
+
+router.post('/isLoggedIn', (req, res) => {
+    // Grabbing the cookie from the browser
+    const jwtCookie = req.cookies.jwt;
+    console.log(jwtCookie)
+    // Using this to check if there was anything in the jwtCookie and if there is nothing it means there is no cookie which signifies there is no logged in user.
+    if (!jwtCookie){
+        return res.json({isLoggedIn: false})
+    }
+    res.json({isLoggedIn: true})
+})
 
 // Post route for logging in accounts
 router.post('/login', async (req, res) => {
