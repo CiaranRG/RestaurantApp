@@ -6,6 +6,7 @@ import './Navbar.scss'
 import Modal from '../Modals/Modal';
 import LoginForm from '../pages/AccountPages/LoginAndRegistration/LoginForm';
 import RegisterForm from '../pages/AccountPages/LoginAndRegistration/RegisterForm';
+import BookTableForm from '../Components/BookTable/BookTableForm';
 
 type NavbarProps = {
     isLoggedIn: boolean;
@@ -35,6 +36,11 @@ export default function Navbar({isLoggedIn, onLogout, onLogin}: NavbarProps){
         toggleModal()
         setModalContent('register')
     }
+    // Adding a third modal function for opening the reservations modal
+    const toggleReservationModal = () => {
+        toggleModal()
+        setModalContent('reservation')
+    }
 
     const handleLogout = () => {
         onLogout()
@@ -60,9 +66,7 @@ export default function Navbar({isLoggedIn, onLogout, onLogin}: NavbarProps){
                 </Link>
                 {/* Only loading this if the isLoggedIn is true */}
                 { isLoggedIn &&
-                <Link to='/accounts/reservations'>
-                    <a href="/accounts/reservations">Reservations</a>
-                </Link> }
+                    <a href="#" onClick={toggleReservationModal}>Reservations</a>}
             </div>
             {/* Using a ternary operator to decide what to display based on login state */}
             <div className='rightNav'>
@@ -77,6 +81,8 @@ export default function Navbar({isLoggedIn, onLogout, onLogin}: NavbarProps){
         <Modal isOpen={isModalOpen} toggleModal={toggleModal}><LoginForm onLogin={onLogin} toggleModal={toggleModal}/></Modal>
     ) : modalContent === 'register' ? (
         <Modal isOpen={isModalOpen} toggleModal={toggleModal}><RegisterForm toggleModal={toggleModal}/></Modal>
+    ) : modalContent === 'reservation' ? (
+        <Modal isOpen={isModalOpen} toggleModal={toggleModal}><BookTableForm toggleModal={toggleModal}/></Modal>
     ) : null}
         </>
     )

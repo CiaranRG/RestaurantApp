@@ -43,7 +43,6 @@ export default function RegisterForm({ toggleModal }){
             }
             setError({show: false, message: ''})
             toggleModal()
-            console.log(success.show, success.message)
         } catch (error) {
             console.log('We hit the error somehow', error)
             // Using AxiosError to check if the error is an axios one or some other type of error, also checking to see if there is an error response for below

@@ -4,12 +4,14 @@ import { registerSchema, loginSchema } from '../models/accountsModel.js';
 import jwt from 'jsonwebtoken';
 import db from '../utils/databaseConnection.js'
 import { config } from 'dotenv';
+import verifyToken from '../utils/verifyToken.js'
 
 const router = express.Router();
 
 // Calling config to have the .env work
 config()
 
+// Restructure this to add the verifyToken middleware
 router.post('/isLoggedIn', async (req, res) => {
     // Grabbing the cookie from the browser
     const jwtCookie = req.cookies.jwt;
@@ -26,7 +28,6 @@ router.post('/isLoggedIn', async (req, res) => {
         }
         const result = await db.query('SELECT id FROM user_accounts WHERE id = $1', [decodedJwt.userId])
         if (result.rows.length === 0 ){
-            console.log('Inside rows check')
             return res.json({isLoggedIn: false})
         }
         res.json({isLoggedIn: true})
@@ -41,7 +42,6 @@ router.post('/isLoggedIn', async (req, res) => {
 router.post('/login', async (req, res) => {
     const loginAccount = req.body
     try {
-        console.log(loginAccount)
         // Check for existence of the error property within this validation
         const { error } = loginSchema.validate(loginAccount)
         

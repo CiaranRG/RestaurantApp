@@ -26,9 +26,12 @@ export default function AccountPage(){
                 <h2 className='accountSubheaderText'>Check Your Bookings Or Create One!</h2>
                 <div className='accountButtonsDiv'>
                     <Link to='/reservations'>
-                        <Button text={'My Reservations'}></Button>
+                        <Button text={'Account Details'}></Button>
                     </Link>
                     <Button text={'Book a Table'} onClick={toggleModal}></Button>
+                    <div className='reservationsList'>
+                        
+                    </div>
                 </div>
             </div>
         </main>

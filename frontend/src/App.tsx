@@ -10,7 +10,6 @@ import Footer from './Footer/Footer'
 // Pages
 import Homepage from './pages/Homepage/Homepage'
 import MenuPage from './pages/MenuPage/MenuPage'
-import ReservationsPage from './pages/ReservationsPage/ReservationsPage'
 import AboutUsPage from './pages/AboutUsPage/AboutUsPage'
 import AccountPage from './pages/AccountPages/MyAccountPages/AccountPage'
 
@@ -42,13 +41,9 @@ function App() {
   };
 
   useEffect(() => {
-    console.log('Entering use effect')
     const checkLogin = async () => {
-      console.log('Checking Login Status')
       try {
         const isLoggedIn = await loginCheck()
-        console.log('Passed Login Check')
-        console.log(isLoggedIn)
         if (!isLoggedIn){
           setIsLoggedIn(false)
         } else {
@@ -71,7 +66,6 @@ function App() {
           <Route path='/home' element={<Homepage/>}/>
           <Route path='/menu' element={<MenuPage/>}/>
           <Route path='/aboutUs' element={<AboutUsPage/>}/>
-          <Route path='/accounts/reservations' element={<ReservationsPage/>}/>
           {isLoggedIn ? (
           // These can only be access when the isLoggedIn state is true 
           <>
