@@ -2,16 +2,31 @@ import './AccountPage.scss'
 import { useEffect, useState } from 'react'
 import Button from '../../../Components/Button/Button'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 import Modal from '../../../Modals/Modal'
 import BookTableForm from '../../../Components/BookTable/BookTableForm'
 
 export default function AccountPage(){
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [reservations, setReservations] = useState([])
 
     useEffect(()=>{
         document.title = 'My Account'
     },[])
+
+    // Using this to get the reservations data
+    useEffect(() => {
+        try {
+            axios('http://localhost:5000/api/reservations', {method: 'GET', withCredentials: true})
+            // We have to use .then since we cannot use any of the data until the promise has resolved 
+            .then((response) => {
+                setReservations(response.data.result)
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }, [])
 
     // Creating a function for toggling the modal to be the opposite of what it Currently is
     const toggleModal = () => {
@@ -29,9 +44,15 @@ export default function AccountPage(){
                         <Button text={'Account Details'}></Button>
                     </Link>
                     <Button text={'Book a Table'} onClick={toggleModal}></Button>
-                    <div className='reservationsList'>
-                        
-                    </div>
+                </div>
+                <div className='reservationsList'>
+                    {reservations.map((reservation) => (
+                        <div className='reservationListItem' style={{marginTop: '100px', backgroundColor: '#7f5539', padding: '20px', border: '4px solid #ede0d4', borderRadius: '20px'}}>
+                            <h1>{reservation.first_name} {reservation.last_name}</h1>
+                            <h2>{reservation.email}</h2>
+                            <h3>{reservation.phone_number} - {reservation.booking_time} - {reservation.num_of_seats}</h3>
+                        </div>
+                    ))}
                 </div>
             </div>
         </main>

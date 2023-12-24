@@ -36,8 +36,17 @@ router.post('/', verifyToken, async (req, res) => {
     }
 });
 
-router.get('/', verifyToken, (req, res) => {
-    res.json(reservations);
+router.get('/', verifyToken, async (req, res) => {
+    // Grabbing the userId from the user object in our verifyToken Middleware
+    const userId = req.user.userId
+    try {
+        const result = await db.query('SELECT * FROM reservations WHERE user_id = $1', [userId])
+        // Use 200 instead of 201 for GET requests being successful and also send the result.rows instead of just the whole result
+        res.status(200).json({result: result.rows})
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ error: "Database error" });
+    }
 });
 
 export { router as reservationRoutes }
