@@ -37,20 +37,27 @@ export default function AccountPage(){
         <>
         <main className='pageBackground'>
             <div className='pageWrapper'>
-                <h1 className='accountHeaderText'>My Account</h1>
+                <h1 className='accountHeaderText' style={{marginTop: '50px'}}>My Account</h1>
                 <h2 className='accountSubheaderText'>Check Your Bookings Or Create One!</h2>
                 <div className='accountButtonsDiv'>
-                    <Link to='/reservations'>
+                    <Link to='/accountDetails'>
                         <Button text={'Account Details'}></Button>
                     </Link>
                     <Button text={'Book a Table'} onClick={toggleModal}></Button>
                 </div>
+                <h2 style={{marginBottom: '-10px', marginTop: '30px' , fontSize: '32px', background: 'transparent', padding: '15px', borderRadius: '10px', border: '3px solid'}}>Bookings Below!</h2>
                 <div className='reservationsList'>
                     {reservations.map((reservation) => (
-                        <div className='reservationListItem' style={{marginTop: '100px', backgroundColor: '#7f5539', padding: '20px', border: '4px solid #ede0d4', borderRadius: '20px'}}>
-                            <h1>{reservation.first_name} {reservation.last_name}</h1>
-                            <h2>{reservation.email}</h2>
-                            <h3>{reservation.phone_number} - {reservation.booking_time} - {reservation.num_of_seats}</h3>
+                        <div className='reservationListItem' style={{
+                            marginTop: '40px', backgroundColor: '#7f5539', padding: '0px 30px 0px 30px', border: '4px solid #ede0d4', borderRadius: '10px', fontSize: '32px', fontWeight: '700'
+                            }}>
+                            <p>Full Name - {reservation.first_name} {reservation.last_name}</p>
+                            <p>Email - {reservation.email}</p>
+                            <p>Date - {reservation.booking_date}</p>
+                            <p>Phone - {reservation.phone_number}</p>
+                            <p>Time - {reservation.booking_time} </p>
+                            <p>Number Of Seats - {reservation.num_of_seats}</p>
+                            <p>Special Requests - {reservation.special_request}</p>
                         </div>
                     ))}
                 </div>

@@ -62,8 +62,9 @@ function App() {
     <Router>
       <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} onLogin={handleLogin}/>
         <Routes>
-          <Route path='/' element={<Homepage/>}/>
-          <Route path='/home' element={<Homepage/>}/>
+          {/* Passing in a isLoggedIn state to our page so we can use it to make decisions within the homepage */}
+          <Route path='/' element={<Homepage isLoggedIn={isLoggedIn}/>}/>
+          <Route path='/home' element={<Homepage isLoggedIn={isLoggedIn}/>}/>
           <Route path='/menu' element={<MenuPage/>}/>
           <Route path='/aboutUs' element={<AboutUsPage/>}/>
           {isLoggedIn ? (

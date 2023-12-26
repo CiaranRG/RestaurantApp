@@ -66,7 +66,7 @@ export default function Navbar({isLoggedIn, onLogout, onLogin}: NavbarProps){
                 </Link>
                 {/* Only loading this if the isLoggedIn is true */}
                 { isLoggedIn &&
-                    <a href="#" onClick={toggleReservationModal}>Reservations</a>}
+                    <a href="#" onClick={toggleReservationModal}>Book Now</a>}
             </div>
             {/* Using a ternary operator to decide what to display based on login state */}
             <div className='rightNav'>

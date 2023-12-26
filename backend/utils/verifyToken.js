@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken'
 // Creating a middleware function to check for a token on requests that need them
 function verifyToken(req, res, next) {
     const token = req.cookies.jwt;
-    console.log(token)
     if (!token) {
         return res.status(401).json({ error: 'No token provided' });
     }
