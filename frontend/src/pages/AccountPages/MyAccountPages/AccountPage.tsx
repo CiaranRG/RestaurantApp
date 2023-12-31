@@ -33,6 +33,14 @@ export default function AccountPage(){
         setIsModalOpen(!isModalOpen)
     }
 
+    type ReservationTypes = {
+        first_name: string,
+        last_name: string,
+        email: string,
+        num_of_seats: number,
+        special_request: string,
+    }
+
     return(
         <>
         <main className='pageBackground'>
@@ -47,7 +55,7 @@ export default function AccountPage(){
                 </div>
                 <h2 style={{marginBottom: '-10px', marginTop: '30px' , fontSize: '32px', background: 'transparent', padding: '15px', borderRadius: '10px', border: '3px solid'}}>Bookings Below!</h2>
                 <div className='reservationsList'>
-                    {reservations.map((reservation) => (
+                    {reservations.map((reservation: ReservationTypes) => (
                         <div className='reservationListItem' style={{
                             marginTop: '40px', backgroundColor: '#7f5539', padding: '0px 30px 0px 30px', border: '4px solid #ede0d4', borderRadius: '10px', fontSize: '32px', fontWeight: '700'
                             }}>

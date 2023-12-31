@@ -52,7 +52,9 @@ export default function Navbar({isLoggedIn, onLogout, onLogin}: NavbarProps){
         <>
         <nav>
             <div className='leftNav'>
+            <Link to='/home'>
                 <h2>BELLA CUCINA</h2>
+            </Link>
             </div>
             <div className='centerNav'>
                 <Link to='/home'>

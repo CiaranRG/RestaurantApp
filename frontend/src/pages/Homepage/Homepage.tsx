@@ -35,8 +35,8 @@ export default function Homepage({isLoggedIn}: isLoggedInType){
             <main className='pageBackground'>
                 <div className='pageWrapper'>
                     <h1 className='homeHeaderText'>BELLA CUCINA</h1>
-                    <h2 className='homeSubheaderText'>Serving great italian food since 1999</h2>
-                    <h3 className='homeSubheaderText'>Browse our menu or create an account to book a table!</h3>
+                    <h2 className='homeHeaderTextTwo'>Serving great italian food since 1999</h2>
+                    <h2 className='homeHeaderTextTwo'>Browse our menu or create an account to book a table!</h2>
                     <div className='homeButtons'>
                     <Button text={'Book A Table'} onClick={toggleBookingModal}/>
                         <Link to='/menu'>

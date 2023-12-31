@@ -8,7 +8,9 @@ html, body, h1, footer, main {
 // Doing this allows me to change just this here and it will change each individual thing instead of going one by one
 $font-stack: 'Roboto', sans-serif;
 $nav-height: 60px;
+$nav-heightMobile: 40px;
 $page-height: calc(100vh - #{$nav-height});
+$page-heightMobile: calc(100vh - #{$nav-heightMobile});
 
 // Setting up a color palette
 $color1: #ede0d4;   
@@ -53,4 +55,7 @@ $text-color: $color1;
     text-align: center;
     @include flex-center;
     color: $color1;
+    @media (max-width: 360px){
+    
+    }
 }
