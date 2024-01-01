@@ -8,7 +8,7 @@ html, body, h1, footer, main {
 // Doing this allows me to change just this here and it will change each individual thing instead of going one by one
 $font-stack: 'Roboto', sans-serif;
 $nav-height: 60px;
-$nav-heightMobile: 40px;
+$nav-heightMobile: 60px;
 $page-height: calc(100vh - #{$nav-height});
 $page-heightMobile: calc(100vh - #{$nav-heightMobile});
 
