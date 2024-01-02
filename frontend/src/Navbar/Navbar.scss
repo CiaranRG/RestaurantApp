@@ -75,6 +75,9 @@ nav {
         > :first-child{
             display: none;
         }
+        > :nth-of-type(4){
+            display: none;
+        }
         width: 30%;
     }
     @media (max-width: 685px){
@@ -84,9 +87,6 @@ nav {
         justify-content: flex-start;
         padding: 0px 0px 0px 15px;
         > :first-child{
-            display: none;
-        }
-        > :last-child{
             display: none;
         }
         width: 30%;
@@ -100,7 +100,7 @@ nav {
         > :first-child{
             display: none;
         }
-        > :last-child{
+        > :nth-of-type(4){
             display: none;
         }
         width: 30%;
@@ -114,7 +114,7 @@ nav {
         > :first-child{
             display: none;
         }
-        > :last-child{
+        > :nth-of-type(4){
             display: none;
         }
         width: 30%;
