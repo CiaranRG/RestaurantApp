@@ -6,9 +6,27 @@
     border: 2px solid $text-color;
     border-radius: 10px;
     height: 30vh;
-    width: 50vw;
+    width: 50%;
     margin-top: 40px;
     background-size: cover;
+    @media (max-width: 1400px){
+        width: 60%;
+    }
+    @media (max-width: 1200px){
+        width: 60%;
+    }
+    @media (max-width: 992px){
+        width: 60%;
+    }
+    @media (max-width: 768px){
+        width: 80%;
+    }
+    @media (max-width: 576px){
+        width: 90%;
+    }
+    @media (max-width: 420px){
+        width: 90%;
+    }
 }
 
 .menuItemFade{
@@ -19,6 +37,25 @@
     background-color: rgba($color: black, $alpha: 0.6);
     border-radius: 7px;
     @include flex-center;
+    @media (max-width: 1200px){
+        font-size: 1rem;
+
+    }
+    @media (max-width: 992px){
+        font-size: 1rem;
+
+    }
+    @media (max-width: 768px){
+        font-size: 1rem;
+
+    }
+    @media (max-width: 576px){
+        font-size: 1rem;
+
+    }
+    @media (max-width: 420px){
+        font-size: 1rem;
+    }
 }
 
 .menuMainContent{
@@ -36,5 +73,58 @@
         font-size: 24px;
         font-weight: 700;
         width: 90%;
+    }
+    @media (max-width: 1400px){
+        h1 {
+            font-size: 2.5rem;
+        }
+        p {
+            font-size: 1.6rem;
+        }
+
+    }
+    @media (max-width: 1200px){
+        h1 {
+            font-size: 2.5rem;
+        }
+        p {
+            font-size: 1.6rem;
+        }
+
+    }
+    @media (max-width: 992px){
+        h1 {
+            font-size: 2.5rem;
+        }
+        p {
+            font-size: 1.5rem;
+        }
+
+    }
+    @media (max-width: 768px){
+        h1 {
+            font-size: 2rem;
+        }
+        p {
+            font-size: 1.2rem;
+        }
+
+    }
+    @media (max-width: 576px){
+        h1 {
+            font-size: 1rem;
+        }
+        p {
+            font-size: 1rem;
+        }
+
+    }
+    @media (max-width: 420px){
+        h1 {
+            font-size: 1rem;
+        }
+        p {
+            font-size: 1rem;
+        }
     }
 }
