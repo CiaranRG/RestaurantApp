@@ -13,7 +13,7 @@ export default function AboutUsPage(){
         <main className='pageBackground'>
             <div className='pageWrapper'>
                 <main className='aboutUsMainContent'>
-                    <div className='aboutCard' style={{maxWidth: '50vw', marginTop: '0px'}}>
+                    <div className='aboutCard'>
                         <h2 className='aboutHeader'>Our Story</h2>
                         <p className='aboutParagraph'> 
                             Nestled in the heart of the city, Bella Cucina began as a dream at a small farmer's market, where fresh, 
@@ -23,7 +23,7 @@ export default function AboutUsPage(){
                             From the simmering sauces to the locally sourced produce, every plate is a celebration of culture, quality, and the joy of shared experiences.
                         </p>
                     </div>
-                    <section style={{display: 'flex', flexDirection: 'row', gap: '50px', justifyContent: 'space-evenly', maxWidth: '90vw', marginBottom: '20px'}}>
+                    <section className='doubleCard'>
                         <div className='aboutCard'>
                             <h2 className='aboutHeader'>Meet The Team</h2>
                             <div className='teammateCard'>
@@ -55,51 +55,6 @@ export default function AboutUsPage(){
                                 </div>
                             </div>
                         </div>
-                        <section className='aboutCard'>
-                            <h2 className='aboutHeader'>Section 2.1</h2>
-                            <p className='aboutParagraph'> 
-                            Nestled in the heart of the city, Bella Cucina began as a dream at a small farmer's market, where fresh, 
-                            flavorful ingredients inspired the creation of meals that both comfort and excite. Founded in 1999, 
-                            our doors opened to bring a fusion of traditional recipes and innovative dining to our beloved community.
-                            Here at Bella Cucina, we believe that every dish should tell a story as rich and compelling as the flavors it carries. 
-                            From the simmering sauces to the locally sourced produce, every plate is a celebration of culture, quality, and the joy of shared experiences.
-                            Nestled in the heart of the city, Bella Cucina began as a dream at a small farmer's market, where fresh, 
-                            flavorful ingredients inspired the creation of meals that both comfort and excite. Founded in 1999, 
-                            our doors opened to bring a fusion of traditional recipes and innovative dining to our beloved community.
-                            Here at Bella Cucina, we believe that every dish should tell a story as rich and compelling as the flavors it carries. 
-                            From the simmering sauces to the locally sourced produce, every plate is a celebration of culture, quality, and the joy of shared experiences.
-                            Nestled in the heart of the city, Bella Cucina began as a dream at a small farmer's market, where fresh, 
-                            flavorful ingredients inspired the creation of meals that both comfort and excite. Founded in 1999, 
-                            our doors opened to bring a fusion of traditional recipes and innovative dining to our beloved community.
-                            Here at Bella Cucina, we believe that every dish should tell a story as rich and compelling as the flavors it carries. 
-                            From the simmering sauces to the locally sourced produce, every plate is a celebration of culture, quality, and the joy of shared experiences.
-                            Nestled in the heart of the city, Bella Cucina began as a dream at a small farmer's market, where fresh, 
-                            flavorful ingredients inspired the creation of meals that both comfort and excite. Founded in 1999, 
-                            our doors opened to bring a fusion of traditional recipes and innovative dining to our beloved community.
-                            Here at Bella Cucina, we believe that every dish should tell a story as rich and compelling as the flavors it carries. 
-                            From the simmering sauces to the locally sourced produce, every plate is a celebration of culture, quality, and the joy of shared experiences.
-                            Nestled in the heart of the city, Bella Cucina began as a dream at a small farmer's market, where fresh, 
-                            flavorful ingredients inspired the creation of meals that both comfort and excite. Founded in 1999, 
-                            our doors opened to bring a fusion of traditional recipes and innovative dining to our beloved community.
-                            Here at Bella Cucina, we believe that every dish should tell a story as rich and compelling as the flavors it carries. 
-                            From the simmering sauces to the locally sourced produce, every plate is a celebration of culture, quality, and the joy of shared experiences.
-                            Nestled in the heart of the city, Bella Cucina began as a dream at a small farmer's market, where fresh, 
-                            flavorful ingredients inspired the creation of meals that both comfort and excite. Founded in 1999, 
-                            our doors opened to bring a fusion of traditional recipes and innovative dining to our beloved community.
-                            Here at Bella Cucina, we believe that every dish should tell a story as rich and compelling as the flavors it carries. 
-                            From the simmering sauces to the locally sourced produce, every plate is a celebration of culture, quality, and the joy of shared experiences.
-                            Nestled in the heart of the city, Bella Cucina began as a dream at a small farmer's market, where fresh, 
-                            flavorful ingredients inspired the creation of meals that both comfort and excite. Founded in 1999, 
-                            our doors opened to bring a fusion of traditional recipes and innovative dining to our beloved community.
-                            Here at Bella Cucina, we believe that every dish should tell a story as rich and compelling as the flavors it carries. 
-                            From the simmering sauces to the locally sourced produce, every plate is a celebration of culture, quality, and the joy of shared experiences.
-                            Nestled in the heart of the city, Bella Cucina began as a dream at a small farmer's market, where fresh, 
-                            flavorful ingredients inspired the creation of meals that both comfort and excite. Founded in 1999, 
-                            our doors opened to bring a fusion of traditional recipes and innovative dining to our beloved community.
-                            Here at Bella Cucina, we believe that every dish should tell a story as rich and compelling as the flavors it carries. 
-                            From the simmering sauces to the locally sourced produce, every plate is a celebration of culture, quality, and the joy of shared experiences.
-                            </p>
-                        </section>
                     </section>
                 </main>
             </div>
