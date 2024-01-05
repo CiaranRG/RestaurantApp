@@ -79,7 +79,7 @@ export default function BookTableForm({toggleModal}: BookTableFormProps){
                     </div>
                     <div className="formRow">
                         <label>
-                            Phone Number:
+                            Phone:
                         </label>
                         <input type="tel" required name="phoneNumber" value={formInfo.phoneNumber} placeholder="" onChange={handleChange}/>
                     </div>
@@ -93,20 +93,20 @@ export default function BookTableForm({toggleModal}: BookTableFormProps){
                     <div className="formRow">
                         <label>
                             Time Of Booking:
-                            <input type="time" required name="bookingTime" autoComplete="off" value={formInfo.bookingTime} onChange={handleChange}/>
                         </label>
+                        <input type="time" required name="bookingTime" autoComplete="off" value={formInfo.bookingTime} onChange={handleChange}/>
                     </div>
                     <div className="formRow">
                         <label>
                             Number Of Seats:
-                            <input type="number" required min={1} max={6} name="numOfSeats" value={formInfo.numOfSeats} onChange={handleChange}/>
                         </label>
+                        <input type="number" required min={1} max={6} name="numOfSeats" value={formInfo.numOfSeats} onChange={handleChange}/>
                     </div>
-                    <div className="formRow">
+                    <div className="formRow specialRequest">
                         <label>
-                            Special Requests: (Character Limit)
-                            <textarea name="specialRequest" required maxLength={50} value={formInfo.specialRequest} onChange={handleChange}></textarea>
+                            Requests:
                         </label>
+                        <textarea name="specialRequest" required maxLength={50} value={formInfo.specialRequest} onChange={handleChange}></textarea>
                     </div>
                     <div className="formRow">
                         {/* Using the checked to change the value of the checkbox */}
