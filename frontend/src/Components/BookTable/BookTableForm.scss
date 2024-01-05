@@ -15,20 +15,24 @@
     background-color: $color5;
     padding: 10px;
     border-radius: 20px;
+    width: 50%;
+    @media (max-width: 1400px){
+        width: 70%;
+    }
     @media (max-width: 1200px){
-        width: 50vw;
+        width: 80%;
     }
     @media (max-width: 992px){
-
+        width: 80%;
     }
     @media (max-width: 768px){
-
+        width: 80%;
     }
     @media (max-width: 576px){
-
+        width: 80%;
     }
     @media (max-width: 420px){
-        width: 80vw;
+        width: 80%;
     }
 }
 
@@ -60,7 +64,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     margin-bottom: 10px;
     input{
@@ -68,81 +72,88 @@
         height: 22px;
         border-radius: 5px;
         border: 2px solid $color4;
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
     textarea{
         padding-left: 5px;
         height: 32px;
         border-radius: 5px;
         border: 2px solid $color4;
+        font-size: 1.8rem;
     }
     label{
         text-shadow: 2px 2px 2px black;
         margin-right: 10px;
         margin-bottom: 4px;
         color: $text-color;
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     @media (max-width: 1200px){
         width: 100%;
         input{
-            font-size: 1rem;
+            font-size: 2rem;
             height: 1rem;
         }
         textarea{
             border: 2px solid $color4;
+            font-size: 1.8rem;
         }
         label{
-            font-size: 2rem;
+            font-size: 2.2rem;
         }
     }
     @media (max-width: 992px){
         width: 100%;
         input{
-            font-size: 1rem;
+            font-size: 2rem;
             height: 1rem;
         }
         textarea{
             border: 2px solid $color4;
+            font-size: 1.8rem;
         }
         label{
-            font-size: 2rem;
+            font-size: 2.2rem;
         }
     }
     @media (max-width: 768px){
         width: 100%;
         input{
-            font-size: 1rem;
+            font-size: 1.5rem;
             height: 1rem;
         }
         textarea{
             border: 2px solid $color4;
+            font-size: 1.2rem;
         }
         label{
-            font-size: 1.5rem;
+            font-size: 1.8rem;
         }
     }
     @media (max-width: 576px){
         width: 100%;
         input{
-            font-size: 0.5rem;
+            font-size: 1.2rem;
             height: 1rem;
         }
         textarea{
             border: 2px solid $color4;
+            font-size: 1rem;
         }
         label{
-            font-size: 1rem;
+            font-size: 1.5rem;
         }
     }
     @media (max-width: 420px){
         width: 100%;
         input{
-            font-size: 0.5rem;
+            font-size: 0.8rem;
             height: 1rem;
+            padding: 2px;
         }
         textarea{
             border: 2px solid $color4;
+            font-size: 0.6rem;
         }
         label{
             font-size: 1rem;

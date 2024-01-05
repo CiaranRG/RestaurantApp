@@ -110,8 +110,8 @@ export default function BookTableForm({toggleModal}: BookTableFormProps){
                     </div>
                     <div className="formRow">
                         {/* Using the checked to change the value of the checkbox */}
-                        <label style={{marginBottom: '20px'}}>
-                            I agree to the terms and conditions:
+                        <label>
+                            I agree to the terms & conditions:
                             <input type="checkbox" name="termsConditions" required checked={formInfo.termsConditions} onChange={handleChange}/>
                         </label>
                     </div>
