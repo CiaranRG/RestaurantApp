@@ -49,16 +49,14 @@ export default function AccountPage(){
                 <h2 className='accountHeaderTextTwo'>Check Your Bookings Or Create One!</h2>
                 <div className='accountButtonsDiv'>
                     <Link to='/accountDetails'>
-                        <Button text={'Account Details'}></Button>
+                        <Button classProp='accountPageButtons' text={'Account Details'}></Button>
                     </Link>
-                    <Button text={'Book a Table'} onClick={toggleModal}></Button>
+                    <Button classProp='accountPageButtons' text={'Book a Table'} onClick={toggleModal}></Button>
                 </div>
                 <h2 className='bookingsTitle'>Bookings Below!</h2>
                 <div className='reservationsList'>
                     {reservations.map((reservation: ReservationTypes) => (
-                        <div className='reservationListItem' style={{
-                            marginTop: '40px', backgroundColor: '#7f5539', padding: '0px 30px 0px 30px', border: '4px solid #ede0d4', borderRadius: '10px', fontSize: '32px', fontWeight: '700'
-                            }}>
+                        <div className='reservationsListItem'>
                             <p>Full Name - {reservation.first_name} {reservation.last_name}</p>
                             <p>Email - {reservation.email}</p>
                             <p>Date - {reservation.booking_date}</p>
