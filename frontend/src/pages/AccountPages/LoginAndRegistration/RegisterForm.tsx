@@ -36,9 +36,6 @@ export default function RegisterForm({ toggleModal }){
             setRegisterInfo({email: '', username: '', password: ''})
             // Checking for a response and if the token is in the response 
             if (response.data && response.data.token) {
-                // Saving the token to local storage inside an object with a key/value token/token
-                const token = response.data.token;
-                localStorage.setItem('token', token);
                 setSuccess({show: true, message: 'Your Account has Been Registered'})
             }
             setError({show: false, message: ''})

@@ -1,15 +1,22 @@
 import './AccountPage.scss'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Button from '../../../Components/Button/Button'
-import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import Modal from '../../../Modals/Modal'
 import BookTableForm from '../../../Components/BookTable/BookTableForm'
 
-export default function AccountPage(){
+type AccountPageProps = {
+    onLogout: () => void
+}
+
+export default function AccountPage({ onLogout }: AccountPageProps){
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [reservations, setReservations] = useState([])
+    const [deleteAccount, setDeleteAccount] = useState({isDelete: false, text: 'Delete Account'})
+
+    const navigate = useNavigate()
 
     useEffect(()=>{
         document.title = 'My Account'
@@ -33,6 +40,36 @@ export default function AccountPage(){
         setIsModalOpen(!isModalOpen)
     }
 
+    const deleteAccountRequest = () => {
+        // Set up this function to delete the account and reservations associated with it
+        console.log('We are in the delete function')
+        try {
+            axios('http://localhost:5000/api/accounts', {method: 'DELETE', withCredentials: true})
+            // We have to use .then since we cannot use any of the data until the promise has resolved 
+            .then((response) => {
+                if (response.data.message === 'Deletion Successful'){
+                    console.log(response.data)
+                    onLogout()
+                    // Using this to navigate the user back to the homepage upon account deletion
+                    navigate('/home');
+                }
+            })
+        } catch (err) {
+            console.log(err)
+            // Notify User of the error
+        }
+    }
+
+    const handleDeleteClick = () => {
+        console.log(deleteAccount.isDelete)
+        if (deleteAccount.isDelete === false){
+            setDeleteAccount({isDelete: true, text: 'Confirm?'})
+            console.log(deleteAccount.isDelete)
+        } else {
+            deleteAccountRequest()
+        }
+    }
+
     type ReservationTypes = {
         first_name: string,
         last_name: string,
@@ -48,9 +85,7 @@ export default function AccountPage(){
                 <h1 className='accountHeaderText' style={{marginTop: '50px'}}>My Account</h1>
                 <h2 className='accountHeaderTextTwo'>Check Your Bookings Or Create One!</h2>
                 <div className='accountButtonsDiv'>
-                    <Link to='/accountDetails'>
-                        <Button classProp='accountPageButtons' text={'Account Details'}></Button>
-                    </Link>
+                    <Button classProp='accountPageButtons' text={deleteAccount.text} onClick={handleDeleteClick}></Button>
                     <Button classProp='accountPageButtons' text={'Book a Table'} onClick={toggleModal}></Button>
                 </div>
                 <h2 className='bookingsTitle'>Bookings Below!</h2>

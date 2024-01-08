@@ -70,7 +70,7 @@ function App() {
           {isLoggedIn ? (
           // These can only be access when the isLoggedIn state is true 
           <>
-            <Route path="/accountPage" element={<AccountPage />} />
+            <Route path="/accountPage" element={<AccountPage onLogout={handleLogout}/>} />
           </>
         ) : (
           // If there was anything here it could only be accessed when logged out

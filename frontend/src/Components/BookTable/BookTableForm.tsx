@@ -43,7 +43,7 @@ export default function BookTableForm({toggleModal}: BookTableFormProps){
         evt.preventDefault()
         try {
             // Setting up our route to post to our backend and adding withCredentials to send the cookies for adding the usersId on the backend      
-            const response = await axios.post('http://localhost:5000/api/reservations', formInfo, {method: 'POST', withCredentials: true})
+            await axios.post('http://localhost:5000/api/reservations', formInfo, {method: 'POST', withCredentials: true})
             setFormInfo({firstName: '', lastName: '', email: '', phoneNumber: '', bookingDate: '', bookingTime: '', specialRequest: '', numOfSeats: 1, termsConditions: false})
         } catch (error) {
             console.log('There was an error', error)

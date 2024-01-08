@@ -104,6 +104,31 @@ router.post('/logout', async (req, res) => {
     res.status(200).json({ message: 'Logout successful' });
 })
 
+// Deletion route for the accounts
+router.delete('/', verifyToken, async (req, res) => {
+    // Grabbing the userId from the user object in our verifyToken Middleware
+    const userId = req.user.userId
+    // Using this try catch to delete all the users reservations
+    try {
+        console.log('Inside delete try catch')
+        // Starting a transaction to the database which can be fully rolled back later if we encounter errors, this is considered ACID (Acronym)
+        await db.query('BEGIN');
+        // Delete user's reservations
+        await db.query('DELETE FROM reservations WHERE user_id = $1', [userId]);
+        // Delete the user's account
+        await db.query('DELETE FROM user_accounts WHERE id = $1', [userId]);
+        // Commit the transaction, if anything above fails we never this commit as this is permanent when committed
+        await db.query('COMMIT');
+        console.log('Delete Committed')
+        res.status(201).json({ message: 'Deletion Successful' });
+    } catch(err) {
+        // This is what we use to undo all the transactions made above if there is any error encountered
+        console.log('Rolling Back Delete')
+        await db.query('ROLLBACK')
+        res.status(500).json({ message: "Deletion Error" });
+    }
+})
+
 // Post route for creating accounts
 router.post('/', async (req, res) => {
     const newAccount = req.body
@@ -118,7 +143,6 @@ router.post('/', async (req, res) => {
             if (err){
                 res.status(500).json({error: 'Error hashing password!'})
             }
-            console.log(hash)
             const result = await db.query(
                 // We are returning the id here so we can attach it to the json web token to send back
                 'INSERT INTO user_accounts (username, email, password) VALUES ($1, $2, $3) RETURNING id',
