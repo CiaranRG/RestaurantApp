@@ -18,6 +18,26 @@
     font-size: 16px;
     color: $color1;
     background-color: $color6;
+    @media (max-width: 1200px){
+        width: 50vw;
+        height: 50vh;
+    }
+    @media (max-width: 992px){
+        width: 50vw;
+        height: 50vh;
+    }
+    @media (max-width: 768px){
+        width: 50vw;
+        height: 40vh;
+    }
+    @media (max-width: 576px){
+        width: 50vw;
+        height: 40vh;
+    }
+    @media (max-width: 420px){
+        width: 50vw;
+        height: 40vh;
+    }
 }
 
 .registerForm {
@@ -32,6 +52,26 @@
 
 .registerHeaderText{
     font-size: 4rem;
+    @media (max-width: 1200px){
+        font-size: 3rem;
+        margin: 20px 0px -5px 0px
+    }
+    @media (max-width: 992px){
+        font-size: 2.6rem;
+        margin: 20px 0px -5px 0px
+    }
+    @media (max-width: 768px){
+        font-size: 2.2rem;
+        margin: 20px 0px -5px 0px
+    }
+    @media (max-width: 576px){
+        font-size: 1.6rem;
+        margin: 20px 0px -5px 0px
+    }
+    @media (max-width: 420px){
+        font-size: 1.5rem;
+        margin: 0px 0px -5px 0px
+    }
 }
 
 .registerFormRow{
@@ -40,16 +80,53 @@
     .registerPasswordInput, .registerEmailInput, .registerUsernameInput {
         border-radius: 5px;
         border: 2px solid white;
-        height: 3vh;
-        padding: 5px;
-        font-size: 24px;
+        height: 2rem;
+        padding: 5px;   
+        font-size: 1.5rem;
         margin-top: 10px;
         // background-color: $color5;
         box-shadow: 0px 0px 5px 1px black;
         // color: $color1;
+        @media (max-width: 1200px){
+            font-size: 1.7rem;
+            height: 1.5rem;
+        }
+        @media (max-width: 992px){
+            font-size: 1.5rem;
+            height: 1.25rem;
+        }
+        @media (max-width: 768px){
+            font-size: 1.5rem;
+            height: 1rem;
+        }
+        @media (max-width: 576px){
+            font-size: 1rem;
+            height: 1rem;
+        }
+        @media (max-width: 420px){
+            font-size: 1rem;
+            height: 1rem;
+        }
     }
     .registerPasswordLabel, .registerEmailLabel, .registerUsernameLabel{
-        font-size: 32px;
-
+        font-size: 2rem;
+        @media (max-width: 1400px){
+            font-size: 2rem;
+        }
+        @media (max-width: 1200px){
+            font-size: 2rem;
+        }
+        @media (max-width: 992px){
+            font-size: 1.8rem;
+        }
+        @media (max-width: 768px){
+            font-size: 1.5rem;
+        }
+        @media (max-width: 576px){
+            font-size: 1.2rem;
+        }
+        @media (max-width: 420px){
+            font-size: 1rem;
+        }
     }
 }

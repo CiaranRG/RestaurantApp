@@ -1,7 +1,7 @@
 import Button from '../../../Components/Button/Button'
 import './registerForm.scss'
 import ErrorMessage from '../../../Components/ErrorMessage/ErrorMessage'
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 import { useEffect, useState } from 'react'
 
 // Defining Types
@@ -77,7 +77,6 @@ export default function RegisterForm({ toggleModal }){
             { error.show === true ? (<ErrorMessage message={error.message}/>) : success.show === true ? (<ErrorMessage message={success.message}/>) : <div></div>}
                 <div className='registerFormDiv'>
                 <h1 className='registerHeaderText'>Create Account</h1>
-                <h2 className='registerSubheaderText'>Use the form below to create your account!</h2>
                     <form className='registerForm' action="" onSubmit={handleSubmit}>
                         <div className='registerFormRow'>
                             <label htmlFor="" className='registerEmailLabel'>
