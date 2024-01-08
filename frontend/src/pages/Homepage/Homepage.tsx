@@ -38,9 +38,9 @@ export default function Homepage({isLoggedIn}: isLoggedInType){
                     <h2 className='homeHeaderTextTwo'>Serving great italian food since 1999</h2>
                     <h2 className='homeHeaderTextTwo'>Browse our menu or create an account to book a table!</h2>
                     <div className='homeButtons'>
-                    <Button text={'Book A Table'} onClick={toggleBookingModal}/>
+                    <Button classProp='homePageButtons' text={'Book A Table'} onClick={toggleBookingModal}/>
                         <Link to='/menu'>
-                            <Button text={'View Menu'}/>
+                            <Button classProp='homePageButtons' text={'View Menu'}/>
                         </Link>
                     </div>
                 </div>
