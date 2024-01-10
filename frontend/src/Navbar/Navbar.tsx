@@ -84,7 +84,7 @@ export default function Navbar({isLoggedIn, onLogout, onLogin}: NavbarProps){
     ) : modalContent === 'register' ? (
         <Modal isOpen={isModalOpen} toggleModal={toggleModal}><RegisterForm toggleModal={toggleModal}/></Modal>
     ) : modalContent === 'reservation' ? (
-        <Modal isOpen={isModalOpen} toggleModal={toggleModal}><BookTableForm toggleModal={toggleModal}/></Modal>
+        <Modal isOpen={isModalOpen} toggleModal={toggleModal}><BookTableForm/></Modal>
     ) : null}
         </>
     )

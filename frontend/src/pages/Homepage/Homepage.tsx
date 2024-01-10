@@ -45,7 +45,7 @@ export default function Homepage({isLoggedIn}: isLoggedInType){
                     </div>
                 </div>
             </main>
-            <Modal isOpen={isModalOpen} toggleModal={toggleModal}><BookTableForm toggleModal={toggleModal}/></Modal>
+            <Modal isOpen={isModalOpen} toggleModal={toggleModal}><BookTableForm/></Modal>
         </>
     )
 }

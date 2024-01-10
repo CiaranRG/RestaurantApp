@@ -16,16 +16,20 @@ export default function MenuPage(){
     useEffect(() => {
         document.title = 'Menu'
     },[])
-    // Creating a useEffect to fetch the data from the backend
+    // Creating a useEffect to fetch the data from the backend, making an async function inside so we can make collect the data
     useEffect(() => {
-        const response = axios.get('http://localhost:5000/api/menu')
-        .then((response) => {
-            // Setting data in the response to be our array of objects in menuItems
-            setMenuItems(response.data)
-        })
-        .catch((error) => {
-            console.log('Error Occurred', error)
-        })
+        const fetchData = async () => {
+            await axios.get('http://localhost:5000/api/menu')
+            .then((response) => {
+                // Setting data in the response to be our array of objects in menuItems
+                setMenuItems(response.data)
+            })
+            .catch((error) => {
+                console.log('Error Occurred', error)
+            })
+        }
+        // Calling the function defined above
+        fetchData()
     }, [])
 
     return(
@@ -34,7 +38,7 @@ export default function MenuPage(){
                 <h1 className='menuHeaderText'>Check Out Our Menu Below!</h1>
                 <div className='menuItemsContainer'>
                     {menuItems.map((item: MenuItem, index: number) => (
-                        <MenuItemCard key={index} name={`${item.name}`} description={`${item.description}`} imgUrl={`${item.imgurl}`} />
+                        <MenuItemCard key={index} name={`${item.name}`} description={`${item.description}`} imgUrl={`${item.imgurl}`}/>
                     ))}
                 </div>
             </div>

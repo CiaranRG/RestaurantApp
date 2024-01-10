@@ -3,7 +3,6 @@ import './MenuItemCard.scss'
 type MenuItem = {
     name: string;
     description: string;
-    ingredients: string;
     imgUrl: string
 }
 

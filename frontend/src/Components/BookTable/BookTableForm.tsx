@@ -16,11 +16,11 @@ type FormInfo = {
    termsConditions: boolean
 }
 
-type BookTableFormProps = {
-    toggleModal: () => void
-}
+// type BookTableFormProps = {
+//     toggleModal: () => void
+// }
 
-export default function BookTableForm({toggleModal}: BookTableFormProps){
+export default function BookTableForm(){
     // Defining the state and filling in blanks for initial values
     const [formInfo, setFormInfo] = useState<FormInfo>({
         firstName: '', lastName: '', email: '', phoneNumber: '', bookingDate: '', bookingTime: '', specialRequest: '', numOfSeats: 1, termsConditions: false

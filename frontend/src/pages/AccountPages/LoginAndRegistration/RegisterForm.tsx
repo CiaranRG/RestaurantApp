@@ -11,7 +11,11 @@ type RegisterInfo = {
     password: string;
 }
 
-export default function RegisterForm({ toggleModal }){
+type registerFormProps = {
+    toggleModal: () => void;
+}
+
+export default function RegisterForm({ toggleModal }: registerFormProps){
     const [registerInfo, setRegisterInfo] = useState<RegisterInfo>({email: '', username: '', password: ''})
     // When setting state with just '' typescript infers that its a string, if you want to be explicit you can add <string> like you usually would.
     const [error, setError] = useState({show: false, message: ''})
@@ -63,7 +67,8 @@ export default function RegisterForm({ toggleModal }){
         setRegisterInfo(prevInfo => ({ ...prevInfo, [name]: value }));
     }
 
-    const handleModalClick = (evt: React.FormEvent<HTMLFormElement>) => {
+    // Make this type a MouseEvent instead of a FormEvent
+    const handleModalClick = (evt: React.MouseEvent<HTMLDivElement>) => {
         // Prevents the click event from bubbling up to the modal overlay
         evt.stopPropagation();
     };

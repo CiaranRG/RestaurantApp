@@ -71,11 +71,16 @@ export default function AccountPage({ onLogout }: AccountPageProps){
     }
 
     type ReservationTypes = {
+        id: number,
         first_name: string,
         last_name: string,
         email: string,
+        phone_number: string,
+        booking_date: string,
+        booking_time: string,
         num_of_seats: number,
         special_request: string,
+        terms_conditions: boolean,
     }
 
     return(
@@ -104,7 +109,7 @@ export default function AccountPage({ onLogout }: AccountPageProps){
                 </div>
             </div>
         </main>
-        <Modal isOpen={isModalOpen} toggleModal={toggleModal}><BookTableForm toggleModal={toggleModal}/></Modal>
+        <Modal isOpen={isModalOpen} toggleModal={toggleModal}><BookTableForm/></Modal>
         </>  
     )
 }
