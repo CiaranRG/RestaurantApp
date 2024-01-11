@@ -1,0 +1,74 @@
+@import '../../App';
+
+.errorHeaderText {
+    font-size: 8rem;
+    @media (max-width: 1200px){
+        font-size: 7rem;
+        padding: 0px 10px 0px 10px;
+    }
+    @media (max-width: 992px){
+        font-size: 6rem;
+        padding: 0px 10px 0px 10px;
+    }
+    @media (max-width: 768px){
+        font-size: 6rem;
+        padding: 0px 10px 0px 10px;
+    }
+    @media (max-width: 576px){
+        font-size: 5rem;
+        padding: 0px 10px 0px 10px;
+    }
+    @media (max-width: 420px){
+        font-size: 4rem;
+    }
+}
+
+.errorHeaderTextTwo {
+    font-size: 2rem;
+    padding: 0px;
+    @media (max-width: 1200px){
+        font-size: 1.6rem;
+        padding: 0px 10px 0px 10px;
+    }
+    @media (max-width: 992px){
+        font-size: 1.6rem;
+        padding: 0px 10px 0px 10px;
+    }
+    @media (max-width: 768px){
+        font-size: 1.6rem;
+        padding: 0px 10px 0px 10px;
+    }
+    @media (max-width: 576px){
+        font-size: 1.2rem;
+        padding: 0px 10px 0px 10px;
+    }
+    @media (max-width: 420px){
+        font-size: 1rem;
+        padding: 0px 10px 0px 10px;
+    }
+}
+
+.errorHomeLink{
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: $color1;
+    padding: 0px;
+    :visited{
+        text-decoration: none;
+    }
+    @media (max-width: 1200px){
+        font-size: 1.5rem;
+    }
+    @media (max-width: 992px){
+        font-size: 1.5rem;
+    }
+    @media (max-width: 768px){
+        font-size: 1.5rem;
+    }
+    @media (max-width: 576px){
+        font-size: 1.2rem;
+    }
+    @media (max-width: 420px){
+        font-size: 1rem;
+    }
+}

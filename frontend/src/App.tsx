@@ -12,6 +12,7 @@ import Homepage from './pages/Homepage/Homepage'
 import MenuPage from './pages/MenuPage/MenuPage'
 import AboutUsPage from './pages/AboutUsPage/AboutUsPage'
 import AccountPage from './pages/AccountPages/MyAccountPages/AccountPage'
+import ErrorPage from './pages/ErrorPage/ErrorPage'
 
 // Importing utilities
 import loginCheck from './utils/loginCheck'
@@ -67,6 +68,7 @@ function App() {
           <Route path='/home' element={<Homepage isLoggedIn={isLoggedIn}/>}/>
           <Route path='/menu' element={<MenuPage/>}/>
           <Route path='/aboutUs' element={<AboutUsPage/>}/>
+          <Route path='/error' element={<ErrorPage/>}/>
           {isLoggedIn ? (
           // These can only be access when the isLoggedIn state is true 
           <>
