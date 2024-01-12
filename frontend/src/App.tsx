@@ -68,7 +68,6 @@ function App() {
           <Route path='/home' element={<Homepage isLoggedIn={isLoggedIn}/>}/>
           <Route path='/menu' element={<MenuPage/>}/>
           <Route path='/aboutUs' element={<AboutUsPage/>}/>
-          <Route path='/error' element={<ErrorPage/>}/>
           {isLoggedIn ? (
           // These can only be access when the isLoggedIn state is true 
           <>
@@ -77,8 +76,11 @@ function App() {
         ) : (
           // If there was anything here it could only be accessed when logged out
           <>
+            <Route path="/accountPage" element={<ErrorPage errorCode='401' errorMessage='Unauthorized Access!'/>} />
           </>
         )}
+        {/* This is out catch all route for when the url doesn't match any other route */}
+        <Route path="*" element={<ErrorPage/>} />
         </Routes>
       <Footer/>
     </Router>
