@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './BookTableForm.scss'
 import Button from "../Button/Button";
 import axios from 'axios'
@@ -25,6 +26,8 @@ export default function BookTableForm(){
     const [formInfo, setFormInfo] = useState<FormInfo>({
         firstName: '', lastName: '', email: '', phoneNumber: '', bookingDate: '', bookingTime: '', specialRequest: '', numOfSeats: 1, termsConditions: false
     })
+    // Setting this up so we can navigate the user to the error page
+    const navigate = useNavigate()
     // Making the type to be a react change event that has either TextAreas or Inputs
     const handleChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         // Destructuring the values and the type so we can run a check below
@@ -46,7 +49,11 @@ export default function BookTableForm(){
             await axios.post('http://localhost:5000/api/reservations', formInfo, {method: 'POST', withCredentials: true})
             setFormInfo({firstName: '', lastName: '', email: '', phoneNumber: '', bookingDate: '', bookingTime: '', specialRequest: '', numOfSeats: 1, termsConditions: false})
         } catch (error) {
-            console.log('There was an error', error)
+            if (import.meta.env.MODE === 'development') {
+                console.log('There was an error', error)
+            }
+            // Navigating the user to the error page and passing in a code and message to use for displaying the error message
+            navigate('/error', { state: { errorCode: 500, errorMessage: 'Booking error, try again!' } });
         }
     }
 

@@ -45,5 +45,10 @@ app.use('/api/accounts', accountRoutes);
 app.use('/api/reservations', reservationRoutes)
 
 app.listen(PORT, (req, res) => {
+    // Only letting this run in development mode
+    if (process.env.NODE_ENV === 'development') {
+        // Code for development mode
+        console.log('Running in development mode');
+    }
     console.log(`Server Running On Port ${PORT}`)
 })
