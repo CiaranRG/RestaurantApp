@@ -43,13 +43,10 @@ export default function LoginForm({ onLogin, toggleModal }: LoginProps){
                 // Checking if the error has data and message properties and if it does we put that in the error message to be used otherwise it will have a generic error message
                 if (err.response.data.error === 'Invalid Credentials') {
                     setError({show: true, message: "That user doesn't exist!"})
-                    console.log(error)
                 } else if (err.response.data.error === 'Validation Error') {
                     setError({show: true, message: 'Your inputs are invalid, try again!'})
-                    console.log(error)
                 } else {
                     setError({show: true, message: 'An unexpected error has occurred'})
-                    console.log(err)
                 }
             }
         }

@@ -31,7 +31,9 @@ export default function AccountPage({ onLogout }: AccountPageProps){
                 setReservations(response.data.result)
             })
         } catch (err) {
-            console.log(err)
+            if (import.meta.env.MODE === 'development') {
+                console.log(err)
+            }
         }
     }, [])
 
@@ -42,29 +44,27 @@ export default function AccountPage({ onLogout }: AccountPageProps){
 
     const deleteAccountRequest = () => {
         // Set up this function to delete the account and reservations associated with it
-        console.log('We are in the delete function')
         try {
             axios('http://localhost:5000/api/accounts', {method: 'DELETE', withCredentials: true})
             // We have to use .then since we cannot use any of the data until the promise has resolved 
             .then((response) => {
                 if (response.data.message === 'Deletion Successful'){
-                    console.log(response.data)
                     onLogout()
                     // Using this to navigate the user back to the homepage upon account deletion
                     navigate('/home');
                 }
             })
         } catch (err) {
-            console.log(err)
+            if (import.meta.env.MODE === 'development') {
+                console.log(err)
+            }
             // Notify User of the error
         }
     }
 
     const handleDeleteClick = () => {
-        console.log(deleteAccount.isDelete)
         if (deleteAccount.isDelete === false){
             setDeleteAccount({isDelete: true, text: 'Confirm?'})
-            console.log(deleteAccount.isDelete)
         } else {
             deleteAccountRequest()
         }

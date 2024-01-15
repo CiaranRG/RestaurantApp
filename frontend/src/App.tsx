@@ -36,8 +36,10 @@ function App() {
       // Update the client-side state, e.g., set isLoggedIn to false
       setIsLoggedIn(false);
     } catch (err) {
-      console.log('Logout failed');
-      console.log(err);
+      if (import.meta.env.MODE === 'development') {
+        console.log('Logout failed');
+        console.log(err);
+      }
     }
   };
 
@@ -51,7 +53,9 @@ function App() {
           setIsLoggedIn(true)
         }
       } catch (err) {
-        console.log(err)
+        if (import.meta.env.MODE === 'development') {
+          console.log(err)
+        }
       }
     }
     checkLogin()
@@ -76,7 +80,7 @@ function App() {
         ) : (
           // If there was anything here it could only be accessed when logged out
           <>
-            <Route path="/accountPage" element={<ErrorPage errorCode='401' errorMessage='Unauthorized Access!'/>} />
+            <Route path="/accountPage" element={<ErrorPage errorCode={401} errorMessage='Unauthorized Access!'/>} />
           </>
         )}
         {/* This is out catch all route for when the url doesn't match any other route */}

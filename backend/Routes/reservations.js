@@ -44,7 +44,9 @@ router.get('/', verifyToken, async (req, res) => {
         // Use 200 instead of 201 for GET requests being successful and also send the result.rows instead of just the whole result
         res.status(200).json({result: result.rows})
     } catch (err) {
-        console.log(err)
+        if (process.env.NODE_ENV === 'development') {
+            console.log(err)
+        }
         res.status(500).json({ error: "Database error" });
     }
 });

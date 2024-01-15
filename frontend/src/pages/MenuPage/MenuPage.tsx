@@ -25,7 +25,9 @@ export default function MenuPage(){
                 setMenuItems(response.data)
             })
             .catch((error) => {
-                console.log('Error Occurred', error)
+                if (import.meta.env.MODE === 'development') {
+                    console.log('Error Occurred', error)
+                }
             })
         }
         // Calling the function defined above

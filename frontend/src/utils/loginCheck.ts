@@ -10,7 +10,9 @@ import axios from "axios"
       return true
     }
   } catch (err) {
-    console.log(err)
+    if (import.meta.env.MODE === 'development') {
+      console.log(err)
+    }
   }
 
 }

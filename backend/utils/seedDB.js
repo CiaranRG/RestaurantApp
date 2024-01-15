@@ -102,7 +102,9 @@ const seedDB = async () => {
             await db.query('INSERT INTO menuItems(name, description, ingredients, imgUrl) VALUES($1, $2, $3, $4)', [item.name, item.description, item.ingredients, item.imgUrl]);
         };
     } catch (error) {
-        console.log('Error Occurred', error)
+        if (process.env.NODE_ENV === 'development') {
+            console.log('Error Occurred', error)
+        }
     }
 }
 
