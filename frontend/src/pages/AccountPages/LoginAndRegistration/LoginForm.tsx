@@ -40,6 +40,9 @@ export default function LoginForm({ onLogin, toggleModal }: LoginProps){
             setLoginInfo({username: '', password: ''})
         } catch (err) {
             if (axios.isAxiosError(err) && err.response){
+                if (import.meta.env.MODE === 'development') {
+                    console.log(err)
+                }
                 // Checking if the error has data and message properties and if it does we put that in the error message to be used otherwise it will have a generic error message
                 if (err.response.data.error === 'Invalid Credentials') {
                     setError({show: true, message: "That user doesn't exist!"})

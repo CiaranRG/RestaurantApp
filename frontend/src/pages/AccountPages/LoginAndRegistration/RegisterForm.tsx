@@ -53,6 +53,9 @@ export default function RegisterForm({ toggleModal }: registerFormProps){
             }
             // Using AxiosError to check if the error is an axios one or some other type of error, also checking to see if there is an error response for below
             if (axios.isAxiosError(error) && error.response){
+                if (import.meta.env.MODE === 'development') {
+                    console.log(error)
+                }
                 // Checking if the error has data and message properties and if it does we put that in the error message to be used otherwise it will have a generic error message
                 if (error.response.data.error === 'Validation error') {
                     setError({show: true, message: 'Your inputs were not valid, please try again!'})

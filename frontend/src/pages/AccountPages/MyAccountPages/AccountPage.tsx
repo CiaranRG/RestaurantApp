@@ -25,21 +25,22 @@ export default function AccountPage({ onLogout }: AccountPageProps){
 
     // Using this to get the reservations data
     useEffect(() => {
-        setIsLoading(true)
-        try {
-            axios('http://localhost:5000/api/reservations', {method: 'GET', withCredentials: true})
-            // We have to use .then since we cannot use any of the data until the promise has resolved 
-            .then((response) => {
-                setReservations(response.data.result)
+        const fetchReservations = async () => {
+            setIsLoading(true)
+            try {
+                const response = await axios('http://localhost:5000/api/reservations', {method: 'GET', withCredentials: true})
+                // We have to use .then since we cannot use any of the data until the promise has resolved 
+                    setReservations(response.data.result)
+                    setIsLoading(false)
+            } catch (err) {
+                if (import.meta.env.MODE === 'development') {
+                    console.log(err)
+                }
                 setIsLoading(false)
-            })
-        } catch (err) {
-            if (import.meta.env.MODE === 'development') {
-                console.log(err)
+                alert('There was a problem loading your reservations')
             }
-            setIsLoading(false)
-            alert('There was a problem loading your reservations')
-        }
+        };
+        fetchReservations()
     }, [])
 
     // Creating a function for toggling the modal to be the opposite of what it Currently is
