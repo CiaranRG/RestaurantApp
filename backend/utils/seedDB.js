@@ -111,5 +111,7 @@ const seedDB = async () => {
 seedDB().then(() => {
     db.end()
 }).catch(error => {
-    console.log(error)
+    if (process.env.NODE_ENV === 'development') {
+        console.log(error)
+    }
 })

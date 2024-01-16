@@ -37,6 +37,9 @@ export default function RegisterForm({ toggleModal }: registerFormProps){
         evt.preventDefault()
         try {
             const response = await axios.post('http://localhost:5000/api/accounts', registerInfo)
+            if (import.meta.env.MODE === 'development') {
+                console.log(registerInfo)
+            }
             setRegisterInfo({email: '', username: '', password: ''})
             // Checking for a response and if the token is in the response 
             if (response.data && response.data.token) {

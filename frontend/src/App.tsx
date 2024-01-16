@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import './App.scss'
 import axios from 'axios'
@@ -47,15 +47,12 @@ function App() {
     const checkLogin = async () => {
       try {
         const isLoggedIn = await loginCheck()
-        if (!isLoggedIn){
-          setIsLoggedIn(false)
-        } else {
-          setIsLoggedIn(true)
-        }
+        setIsLoggedIn(isLoggedIn)
       } catch (err) {
         if (import.meta.env.MODE === 'development') {
           console.log(err)
         }
+        setIsLoggedIn(false)
       }
     }
     checkLogin()

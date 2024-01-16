@@ -11,7 +11,11 @@ const app = express()
 const PORT = 5000
 
 // Adding in origin to allow requests from the frontend and also setting credentials to true for user authentication through cookies
-app.use(cors({origin: 'http://localhost:5173', credentials: true}));
+app.use(
+    cors(
+        {origin: 'http://localhost:5173', credentials: true}
+    )
+);
 app.use(express.json());
 // Using this to make parsing cookies easier
 app.use(cookieParser())

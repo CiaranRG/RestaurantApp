@@ -4,7 +4,6 @@ import './AboutUsPage.scss'
 
 
 export default function AboutUsPage(){
-    // const navigate = useNavigate();
     useEffect(()=>{
         document.title = 'About Us'
     },[])

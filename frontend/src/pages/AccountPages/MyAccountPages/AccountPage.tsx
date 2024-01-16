@@ -15,6 +15,7 @@ export default function AccountPage({ onLogout }: AccountPageProps){
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [reservations, setReservations] = useState([])
     const [deleteAccount, setDeleteAccount] = useState({isDelete: false, text: 'Delete Account'})
+    const [isLoading, setIsLoading] = useState(false)
 
     const navigate = useNavigate()
 
@@ -24,16 +25,20 @@ export default function AccountPage({ onLogout }: AccountPageProps){
 
     // Using this to get the reservations data
     useEffect(() => {
+        setIsLoading(true)
         try {
             axios('http://localhost:5000/api/reservations', {method: 'GET', withCredentials: true})
             // We have to use .then since we cannot use any of the data until the promise has resolved 
             .then((response) => {
                 setReservations(response.data.result)
+                setIsLoading(false)
             })
         } catch (err) {
             if (import.meta.env.MODE === 'development') {
                 console.log(err)
             }
+            setIsLoading(false)
+            alert('There was a problem loading your reservations')
         }
     }, [])
 
@@ -87,13 +92,17 @@ export default function AccountPage({ onLogout }: AccountPageProps){
         <>
         <main className='pageBackground'>
             <div className='pageWrapper'>
-                <h1 className='accountHeaderText' style={{marginTop: '50px'}}>My Account</h1>
-                <h2 className='accountHeaderTextTwo'>Check Your Bookings Or Create One!</h2>
-                <div className='accountButtonsDiv'>
-                    <Button classProp='accountPageButtons' text={deleteAccount.text} onClick={handleDeleteClick}></Button>
-                    <Button classProp='accountPageButtons' text={'Book a Table'} onClick={toggleModal}></Button>
-                </div>
-                <h2 className='bookingsTitle'>Bookings Below!</h2>
+                {isLoading ? <h1 className='accountHeaderText'>Loading!</h1> : 
+                <>
+                    <h1 className='accountHeaderText'>My Account</h1>
+                    <h2 className='accountHeaderTextTwo'>Check Your Bookings Or Create One!</h2>
+                    <div className='accountButtonsDiv'>
+                        <Button classProp='accountPageButtons' text={deleteAccount.text} onClick={handleDeleteClick}></Button>
+                        <Button classProp='accountPageButtons' text={'Book a Table'} onClick={toggleModal}></Button>
+                    </div>
+                    <h2 className='bookingsTitle'>Bookings Below!</h2>
+                </>
+                }
                 <div className='reservationsList'>
                     {reservations.map((reservation: ReservationTypes) => (
                         <div className='reservationsListItem'>
