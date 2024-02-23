@@ -72,8 +72,9 @@ router.post('/login', async (req, res) => {
                     // When we start the app or when its hosting on a site the environment will be set to production which will make the secure option true, which allows only https requests
                     secure: process.env.NODE_ENV === 'production',
                     // 
-                    sameSite: 'Strict', // Adjust according to your needs
-                    maxAge: 14 * 24 * 60 * 60 * 1000, // 2 weeks in milliseconds
+                    sameSite: 'Strict',
+                    // 2 weeks in milliseconds
+                    maxAge: 14 * 24 * 60 * 60 * 1000,
                     path: '/',
                 });
                 res.status(201).json({message: 'User Was Found', token })
