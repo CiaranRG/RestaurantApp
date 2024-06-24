@@ -12,6 +12,11 @@
         text-decoration: none;
         color: $text-color;
     }
+    .socialLinks{
+        display: flex;
+        gap: 20px;
+        font-size: 1.5rem;
+    }
     @media (max-width: 1400px){
         font-size: 1.3rem;
     }
@@ -23,6 +28,9 @@
     }
     @media (max-width: 768px){
         font-size: 1rem;
+        .socialLinks{
+            font-size: 1.2rem;
+        }
     }
     @media (max-width: 685px){
         font-size: 1rem;
