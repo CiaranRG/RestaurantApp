@@ -50,7 +50,7 @@ app.use('/api/reservations', reservationRoutes)
 
 app.listen(PORT, (req, res) => {
     // Only letting this run in development mode
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV !== 'production') {
         console.log(`Server Running On Port ${PORT}`)
     }
 })
