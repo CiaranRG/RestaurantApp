@@ -14,6 +14,8 @@ type LoginProps = {
     toggleModal: () => void;
 }
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function LoginForm({ onLogin, toggleModal }: LoginProps){
     const [loginInfo, setLoginInfo] = useState<LoginInfo>({username: '', password: ''})
     const [error, setError] = useState({show: false, message: ''})
@@ -34,7 +36,7 @@ export default function LoginForm({ onLogin, toggleModal }: LoginProps){
         evt.preventDefault()
         try {
             // Need to add the option withCredentials for axios to accept the cookie since we have our front and backends on different origins
-            await axios.post('http://localhost:5000/api/accounts/login', loginInfo, { withCredentials: true })
+            await axios.post(`${apiUrl}/api/accounts/login`, loginInfo, { withCredentials: true })
             onLogin()
             toggleModal()
             setLoginInfo({username: '', password: ''})

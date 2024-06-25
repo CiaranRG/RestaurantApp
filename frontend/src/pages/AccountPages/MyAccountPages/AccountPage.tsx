@@ -11,6 +11,8 @@ type AccountPageProps = {
     onLogout: () => void
 }
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function AccountPage({ onLogout }: AccountPageProps){
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [reservations, setReservations] = useState([])
@@ -28,7 +30,7 @@ export default function AccountPage({ onLogout }: AccountPageProps){
         const fetchReservations = async () => {
             setIsLoading(true)
             try {
-                const response = await axios('http://localhost:5000/api/reservations', {method: 'GET', withCredentials: true})
+                const response = await axios(`${apiUrl}/api/reservations`, {method: 'GET', withCredentials: true})
                 // We have to use .then since we cannot use any of the data until the promise has resolved 
                     setReservations(response.data.result)
                     setIsLoading(false)
@@ -51,7 +53,7 @@ export default function AccountPage({ onLogout }: AccountPageProps){
     const deleteAccountRequest = () => {
         // Set up this function to delete the account and reservations associated with it
         try {
-            axios('http://localhost:5000/api/accounts', {method: 'DELETE', withCredentials: true})
+            axios(`${apiUrl}/api/accounts`, {method: 'DELETE', withCredentials: true})
             // We have to use .then since we cannot use any of the data until the promise has resolved 
             .then((response) => {
                 if (response.data.message === 'Deletion Successful'){

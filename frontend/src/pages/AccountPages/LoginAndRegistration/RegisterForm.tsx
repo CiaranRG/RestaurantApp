@@ -15,6 +15,8 @@ type registerFormProps = {
     toggleModal: () => void;
 }
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function RegisterForm({ toggleModal }: registerFormProps){
     const [registerInfo, setRegisterInfo] = useState<RegisterInfo>({email: '', username: '', password: ''})
     // When setting state with just '' typescript infers that its a string, if you want to be explicit you can add <string> like you usually would.
@@ -36,7 +38,7 @@ export default function RegisterForm({ toggleModal }: registerFormProps){
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
         try {
-            const response = await axios.post('http://localhost:5000/api/accounts', registerInfo)
+            const response = await axios.post(`${apiUrl}/api/accounts`, registerInfo)
             if (import.meta.env.MODE === 'development') {
                 console.log(registerInfo)
             }

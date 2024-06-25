@@ -11,6 +11,8 @@ type MenuItem = {
     imgurl: string
 }
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function MenuPage(){
     // Defining the state so it starts as an empty array 
     const [menuItems, setMenuItems] = useState<MenuItem[]>([])
@@ -25,7 +27,7 @@ export default function MenuPage(){
     useEffect(() => {
         setIsLoading(true)
         const fetchData = async () => {
-            await axios.get('http://localhost:5000/api/menu')
+            await axios.get(`${apiUrl}/api/menu`)
             .then((response) => {
                 // Setting data in the response to be our array of objects in menuItems
                 setMenuItems(response.data)
