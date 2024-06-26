@@ -14,7 +14,7 @@ const PORT = 5000
 app.use(
     cors(
 
-        {origin: 'https://restaurant-app-teal.vercel.app/', credentials: true}
+        {origin: 'https://restaurant-app-teal.vercel.app', credentials: true}
     )
 );
 app.use(express.json());
