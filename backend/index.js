@@ -10,13 +10,20 @@ config();
 const app = express()
 const PORT = 5000
 
-// Adding in origin to allow requests from the frontend and also setting credentials to true for user authentication through cookies
-app.use(
-    cors(
+const allowedOrigins = ['https://restaurant-app-teal.vercel.app'];
 
-        {origin: 'https://restaurant-app-teal.vercel.app', credentials: true}
-    )
-);
+const corsOptions = {
+    origin: function(origin, callback){
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 // Using this to make parsing cookies easier
 app.use(cookieParser())
