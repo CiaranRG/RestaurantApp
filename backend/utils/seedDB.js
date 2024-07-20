@@ -1,26 +1,4 @@
-import { config } from 'dotenv';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Path to the .env file
-const envPath = join(__dirname, '..', '.env');
-config({ path: envPath });
-
-// Importing full pg package then destructing pool from it
-import pg  from 'pg'
-const { Pool } = pg
-
-// Creating postgreSQL connection
-const db = new Pool({
-    user: process.env.PG_USER,
-    host: 'localhost',
-    database: process.env.PG_DATABASE,
-    password: process.env.PG_PASS,
-    port: 5432, // Default port for PostgreSQL
-});
+import db from './databaseConnection'
 
 // Create default information to seed the database when needed
 const menuDB = [

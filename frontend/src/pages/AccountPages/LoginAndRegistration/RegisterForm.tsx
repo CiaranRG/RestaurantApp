@@ -1,5 +1,5 @@
 import Button from '../../../Components/Button/Button'
-import './registerForm.scss'
+import './RegisterForm.scss'
 import ErrorMessage from '../../../Components/ErrorMessage/ErrorMessage'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
