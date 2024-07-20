@@ -1,7 +1,7 @@
 // Creating a separate file to be able to import to anywhere we need database interaction
 
 // Importing full pg package then destructing pool from it
-import pg from 'pg'
+import pg  from 'pg'
 import { config } from 'dotenv';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';

@@ -17,9 +17,7 @@ type FormInfo = {
    termsConditions: boolean
 }
 
-// type BookTableFormProps = {
-//     toggleModal: () => void
-// }
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function BookTableForm(){
     // Defining the state and filling in blanks for initial values
@@ -46,8 +44,9 @@ export default function BookTableForm(){
         evt.preventDefault()
         try {
             // Setting up our route to post to our backend and adding withCredentials to send the cookies for adding the usersId on the backend      
-            await axios.post('http://localhost:5000/api/reservations', formInfo, {method: 'POST', withCredentials: true})
+            await axios.post(`${apiUrl}/api/reservations`, formInfo, {method: 'POST', withCredentials: true})
             setFormInfo({firstName: '', lastName: '', email: '', phoneNumber: '', bookingDate: '', bookingTime: '', specialRequest: '', numOfSeats: 1, termsConditions: false})
+            alert('Your reservation was submitted!')
         } catch (error) {
             if (import.meta.env.MODE === 'development') {
                 console.log('There was an error', error)

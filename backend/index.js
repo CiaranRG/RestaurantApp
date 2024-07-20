@@ -8,29 +8,22 @@ import db from './utils/databaseConnection.js'
 config();
 
 const app = express()
-const PORT = process.env.BACKEND_PORT || 5000
+const PORT = 5000
 
+const allowedOrigins = ['https://restaurant-app-teal.vercel.app'];
 
-const allowedOrigins = [process.env.REACT_FRONTEND, 'http://127.0.0.1:5173'];
-
-// Adding in origin to allow requests from the frontend and also setting credentials to true for user authentication through cookies
 const corsOptions = {
     origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
         }
     },
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    credentials: true
 };
 
 app.use(cors(corsOptions));
-
-app.options('*', cors(corsOptions));
-
 app.use(express.json());
 // Using this to make parsing cookies easier
 app.use(cookieParser())

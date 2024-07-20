@@ -31,7 +31,6 @@ function App() {
   const handleLogout = async () => {
     try {
       // Make a request to the backend logout route
-      // I had to restructure the axios request for some reason from what I had which was this - await axios.post('http://localhost:5000/api/accounts/logout', { withCredentials: true });
       axios('http://localhost:5000/api/accounts/logout', {method: 'POST', withCredentials: true})
       // Update the client-side state, e.g., set isLoggedIn to false
       setIsLoggedIn(false);

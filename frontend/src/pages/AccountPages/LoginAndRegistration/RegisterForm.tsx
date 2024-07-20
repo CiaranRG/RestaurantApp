@@ -15,6 +15,8 @@ type registerFormProps = {
     toggleModal: () => void;
 }
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function RegisterForm({ toggleModal }: registerFormProps){
     const [registerInfo, setRegisterInfo] = useState<RegisterInfo>({email: '', username: '', password: ''})
     // When setting state with just '' typescript infers that its a string, if you want to be explicit you can add <string> like you usually would.
@@ -36,7 +38,7 @@ export default function RegisterForm({ toggleModal }: registerFormProps){
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
         try {
-            const response = await axios.post('http://localhost:5000/api/accounts', registerInfo)
+            const response = await axios.post(`${apiUrl}/api/accounts`, registerInfo)
             if (import.meta.env.MODE === 'development') {
                 console.log(registerInfo)
             }
@@ -53,6 +55,9 @@ export default function RegisterForm({ toggleModal }: registerFormProps){
             }
             // Using AxiosError to check if the error is an axios one or some other type of error, also checking to see if there is an error response for below
             if (axios.isAxiosError(error) && error.response){
+                if (import.meta.env.MODE === 'development') {
+                    console.log(error)
+                }
                 // Checking if the error has data and message properties and if it does we put that in the error message to be used otherwise it will have a generic error message
                 if (error.response.data.error === 'Validation error') {
                     setError({show: true, message: 'Your inputs were not valid, please try again!'})

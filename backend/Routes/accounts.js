@@ -36,7 +36,7 @@ router.post('/isLoggedIn', async (req, res) => {
         }
         res.json({isLoggedIn: true})
     } catch (err) {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV !== 'production') {
             console.log('An error has occurred')
             console.log(err)
         }
@@ -72,8 +72,9 @@ router.post('/login', async (req, res) => {
                     // When we start the app or when its hosting on a site the environment will be set to production which will make the secure option true, which allows only https requests
                     secure: process.env.NODE_ENV === 'production',
                     // 
-                    sameSite: 'Strict', // Adjust according to your needs
-                    maxAge: 14 * 24 * 60 * 60 * 1000, // 2 weeks in milliseconds
+                    sameSite: 'Strict',
+                    // 2 weeks in milliseconds
+                    maxAge: 14 * 24 * 60 * 60 * 1000,
                     path: '/',
                 });
                 res.status(201).json({message: 'User Was Found', token })
@@ -81,14 +82,14 @@ router.post('/login', async (req, res) => {
                 throw new Error('Invalid user credentials')
             }
         } else {
-            if (process.env.NODE_ENV === 'development') {
+            if (process.env.NODE_ENV !== 'production') {
                 console.log('We could not find that user')
             }
             throw new Error("Invalid Credentials")
         }
 
     } catch (err) {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV !== 'production') {
             console.log(err)
         }
         // Using instanceof to check if it was a database error to 
@@ -126,7 +127,7 @@ router.delete('/', verifyToken, async (req, res) => {
         await db.query('COMMIT');
         res.status(201).json({ message: 'Deletion Successful' });
     } catch(err) {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV !== 'production') {
         // This is what we use to undo all the transactions made above if there is any error encountered
             console.log('Rolling Back Delete')
             console.log(err)
