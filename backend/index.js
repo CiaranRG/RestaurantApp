@@ -10,7 +10,7 @@ config();
 const app = express()
 const PORT = 5000
 
-const allowedOrigins = ['https://restaurant-app-teal.vercel.app'];
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
 
 const corsOptions = {
     origin: function (origin, callback) {
