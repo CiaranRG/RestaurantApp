@@ -79,7 +79,6 @@ function App() {
             <Route path="/accountPage" element={<ErrorPage errorCode={401} errorMessage='Unauthorized Access!'/>} />
           </>
         )}
-        {/* This is out catch all route for when the url doesn't match any other route */}
         <Route path="*" element={<ErrorPage/>} />
         </Routes>
       <Footer/>
