@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { config } from 'dotenv';
+import helmet from 'helmet'
 
 import db from './utils/databaseConnection.js'
 
@@ -27,6 +28,12 @@ app.use(cors(corsOptions));
 app.use(express.json());
 // Using this to make parsing cookies easier
 app.use(cookieParser())
+
+// Manually set Content Security Policy headers
+app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' bella-cucina-frontend.vercel.app; connect-src 'self' bella-cucina-frontend.vercel.app;");
+    next();
+});
 
 // Telling the app to use the cors middleware for all the preflight requests
 // app.options('/api/accounts/login', cors());
