@@ -6,24 +6,13 @@
 
 .aboutUsSubHeaderText {
     font-size: 5rem;
-    @media (max-width: 1200px){
 
-    }
-    @media (max-width: 992px){
-
-    }
-    @media (max-width: 768px){
-
-    }
-    @media (max-width: 576px){
-
-    }
-    @media (max-width: 420px){
+    @media (max-width: 420px) {
         font-size: 1rem;
     }
 }
 
-.aboutUsMainContent{
+.aboutUsMainContent {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,46 +20,51 @@
     margin: 0px 0px 40px 0px;
 }
 
-.doubleCard{
+.doubleCard {
     display: flex;
     flex-direction: row;
     gap: 50px;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-    @media (max-width: 1200px){
-    font-size: 1rem;
-    min-width: 90%;
-    flex-direction: column;
-    justify-content: center;
+
+    @media (max-width: 1200px) {
+        font-size: 1rem;
+        min-width: 90%;
+        flex-direction: column;
+        justify-content: center;
     }
-    @media (max-width: 992px){
-    font-size: 1rem;
-    min-width: 90%;
-    flex-direction: column;
-    justify-content: center;
+
+    @media (max-width: 992px) {
+        font-size: 1rem;
+        min-width: 90%;
+        flex-direction: column;
+        justify-content: center;
     }
-    @media (max-width: 768px){
-    font-size: 1rem;
-    min-width: 90%;
-    flex-direction: column;
-    justify-content: center;
+
+    @media (max-width: 768px) {
+        font-size: 1rem;
+        min-width: 90%;
+        flex-direction: column;
+        justify-content: center;
     }
-    @media (max-width: 576px){
-    font-size: 1rem;
-    min-width: 90%;
-    flex-direction: column;
-    justify-content: center;
+
+    @media (max-width: 576px) {
+        font-size: 1rem;
+        min-width: 90%;
+        flex-direction: column;
+        justify-content: center;
     }
-    @media (max-width: 420px){
-    font-size: 1rem;
-    min-width: 90%;
-    flex-direction: column;
-    justify-content: center;
+
+    @media (max-width: 420px) {
+        font-size: 1rem;
+        min-width: 90%;
+        flex-direction: column;
+        justify-content: center;
     }
 }
 
-.aboutCard{
+.aboutCard {
     margin: 40px 0px 0px 0px;
     border: 2px solid white;
     border-radius: 10px;
@@ -78,139 +72,150 @@
     font-size: 2rem;
     background-color: $color6;
     min-width: 50%;
-    max-width: 50%;
-    .aboutParagraph{
+    max-width: 80%;
+
+    .aboutParagraph {
         font-size: 1.2rem;
         font-weight: 700;
         margin: 20px;
-        @media (max-width: 1200px){
 
-        }
-        @media (max-width: 992px){
-    
-        }
-        @media (max-width: 768px){
-    
-        }
-        @media (max-width: 576px){
-    
-        }
-        @media (max-width: 420px){
-        font-size: 1rem;
-        padding: 0px 0px 0px 0px;
+        @media (max-width: 1200px) {}
+
+        @media (max-width: 992px) {}
+
+        @media (max-width: 768px) {}
+
+        @media (max-width: 576px) {}
+
+        @media (max-width: 420px) {
+            font-size: 1rem;
+            padding: 0px 0px 0px 0px;
         }
     }
-    .aboutHeader{
+
+    .aboutHeader {
         margin: 10px 0px 20px 0px;
         padding: 0px 0px 20px 0px;
-        @media (max-width: 1200px){
 
+        @media (max-width: 1200px) {}
+
+        @media (max-width: 992px) {}
+
+        @media (max-width: 768px) {}
+
+        @media (max-width: 576px) {}
+
+        @media (max-width: 420px) {
+            font-size: 1.5rem;
         }
-        @media (max-width: 992px){
-    
-        }
-        @media (max-width: 768px){
-    
-        }
-        @media (max-width: 576px){
-    
-        }
-        @media (max-width: 420px){
+    }
+
+    @media (max-width: 1200px) {}
+
+    @media (max-width: 992px) {}
+
+    @media (max-width: 768px) {}
+
+    @media (max-width: 576px) {}
+
+    @media (max-width: 420px) {
         font-size: 1.5rem;
-        }
-    }
-    @media (max-width: 1200px){
-
-    }
-    @media (max-width: 992px){
-
-    }
-    @media (max-width: 768px){
-
-    }
-    @media (max-width: 576px){
-
-    }
-    @media (max-width: 420px){
-    font-size: 1.5rem;
-    min-width: 80%;
+        min-width: 80%;
     }
 }
 
-.teammateCard{
+.teammateCard {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 95%;
     margin: 10px;
     padding: 0px 0px 20px 0px;
+
     // border-bottom: 2px solid white;
-    .teammateText{
+    .teammateText {
         font-size: 1rem;
         font-weight: 700;
-        @media (max-width: 1200px){
+
+        @media (max-width: 1200px) {
             font-size: 0.8rem;
         }
-        @media (max-width: 992px){
+
+        @media (max-width: 992px) {
             font-size: 0.8rem;
         }
-        @media (max-width: 768px){
+
+        @media (max-width: 768px) {
             font-size: 0.8rem;
         }
-        @media (max-width: 576px){
+
+        @media (max-width: 576px) {
             font-size: 0.8rem;
         }
-        @media (max-width: 420px){
+
+        @media (max-width: 420px) {
             font-size: 0.8rem;
         }
     }
-    .teammateImg{
+
+    .teammateImg {
         width: 300px;
         height: 300px;
         object-fit: cover;
         border-radius: 5px;
         border: 2px solid white;
-        @media (max-width: 1200px){
+
+        @media (max-width: 1200px) {
             width: 200px;
             height: 200px;
             margin: 0px 0px 10px 0px
         }
-        @media (max-width: 992px){
+
+        @media (max-width: 992px) {
             width: 200px;
             height: 200px;
             margin: 0px 0px 10px 0px
         }
-        @media (max-width: 768px){
+
+        @media (max-width: 768px) {
             width: 200px;
             height: 200px;
             margin: 0px 0px 10px 0px
         }
-        @media (max-width: 576px){
+
+        @media (max-width: 576px) {
             width: 200px;
             height: 200px;
             margin: 0px 0px 10px 0px
         }
-        @media (max-width: 420px){
+
+        @media (max-width: 420px) {
             width: 200px;
             height: 200px;
             margin: 0px 0px 10px 0px
         }
     }
-    .teammateHeader{
+
+    .teammateHeader {
         font-size: 2rem;
-        @media (max-width: 1200px){
+
+        @media (max-width: 1200px) {
             font-size: 1rem;
         }
-        @media (max-width: 992px){
+
+        @media (max-width: 992px) {
             font-size: 1rem;
         }
-        @media (max-width: 768px){
+
+        @media (max-width: 768px) {
             font-size: 1rem;
         }
-        @media (max-width: 576px){
+
+        @media (max-width: 576px) {
             font-size: 1rem;
         }
-        @media (max-width: 420px){
+
+        @media (max-width: 420px) {
             font-size: 1rem;
         }
     }

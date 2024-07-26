@@ -103,7 +103,6 @@ router.post('/login', async (req, res) => {
 })
 
 router.post('/logout', async (req, res) => {
-    const jwtCookie = req.cookies.jwt;
     // Using this to clear the cookie on the clients side
     res.clearCookie('jwt', { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'Strict', path: '/' });
     // Send a response to the client
@@ -150,7 +149,7 @@ router.post('/', async (req, res) => {
             if (err) {
                 res.status(500).json({ error: 'Error hashing password!' })
             }
-            const result = await db.query(
+            await db.query(
                 // We are returning the id here so we can attach it to the json web token to send back
                 'INSERT INTO user_accounts (username, email, password) VALUES ($1, $2, $3) RETURNING id',
                 [
