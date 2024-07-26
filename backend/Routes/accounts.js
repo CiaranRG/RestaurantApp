@@ -20,21 +20,21 @@ router.post('/isLoggedIn', async (req, res) => {
     // Grabbing the cookie from the browser
     const jwtCookie = req.cookies.jwt;
     // Using this to check if there was anything in the jwtCookie and if there is nothing it means there is no cookie which signifies there is no logged in user.
-    if (!jwtCookie){
+    if (!jwtCookie) {
         // Returning this if there is no cookie
-        return res.json({isLoggedIn: false})
+        return res.json({ isLoggedIn: false })
     }
     try {
         // Decoding the JWT using verify and passing in the token then the secret we used to create the tokens
         const decodedJwt = jwt.verify(jwtCookie, process.env.JWT_SECRET)
-        if (!decodedJwt.userId){
-            return res.json({isLoggedIn: false})
+        if (!decodedJwt.userId) {
+            return res.json({ isLoggedIn: false })
         }
         const result = await db.query('SELECT id FROM user_accounts WHERE id = $1', [decodedJwt.userId])
-        if (result.rows.length === 0 ){
-            return res.json({isLoggedIn: false})
+        if (result.rows.length === 0) {
+            return res.json({ isLoggedIn: false })
         }
-        res.json({isLoggedIn: true})
+        res.json({ isLoggedIn: true })
     } catch (err) {
         if (process.env.NODE_ENV !== 'production') {
             console.log('An error has occurred')
@@ -50,8 +50,8 @@ router.post('/login', async (req, res) => {
     try {
         // Check for existence of the error property within this validation
         const { error } = loginSchema.validate(loginAccount)
-        
-        if (error){
+
+        if (error) {
             throw new Error('Validation Error')
         }
         // Checking for the persons username in the database
@@ -61,7 +61,7 @@ router.post('/login', async (req, res) => {
             // Checking that the hashed password in the database matches the hashed password combo the user is submitting
             const passwordValidation = await bcrypt.compare(loginAccount.password, result.rows[0].password);
             // Checking the password is valid using bcrypt and if its not we throw a new error to get into the catch block
-            if (passwordValidation){
+            if (passwordValidation) {
                 const userId = result.rows[0].id
                 // Creating the json web token that has the userId in it, also pulling the secret from our .env file and setting it to expire in 2 weeks
                 const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '2w' });
@@ -72,12 +72,11 @@ router.post('/login', async (req, res) => {
                     // When we start the app or when its hosting on a site the environment will be set to production which will make the secure option true, which allows only https requests
                     secure: process.env.NODE_ENV === 'production',
                     // 
-                    sameSite: 'Strict',
+                    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
                     // 2 weeks in milliseconds
                     maxAge: 14 * 24 * 60 * 60 * 1000,
-                    path: '/',
                 });
-                res.status(201).json({message: 'User Was Found', token })
+                res.status(201).json({ message: 'User Was Found', token })
             } else {
                 throw new Error('Invalid user credentials')
             }
@@ -94,11 +93,11 @@ router.post('/login', async (req, res) => {
         }
         // Using instanceof to check if it was a database error to 
         if (err.message === 'Invalid Credentials') {
-            res.status(401).json({ error: 'Invalid Credentials', details: err.details});
-        } else if (err.message === 'Validation Error'){
-            res.status(400).json({ error: 'Validation Error', details: err.details});
+            res.status(401).json({ error: 'Invalid Credentials', details: err.details });
+        } else if (err.message === 'Validation Error') {
+            res.status(400).json({ error: 'Validation Error', details: err.details });
         } else {
-            res.status(401).json({ error: 'Unknown Error'});
+            res.status(401).json({ error: 'Unknown Error' });
         }
     }
 })
@@ -126,9 +125,9 @@ router.delete('/', verifyToken, async (req, res) => {
         // Commit the transaction, if anything above fails we never this commit as this is permanent when committed
         await db.query('COMMIT');
         res.status(201).json({ message: 'Deletion Successful' });
-    } catch(err) {
+    } catch (err) {
         if (process.env.NODE_ENV !== 'production') {
-        // This is what we use to undo all the transactions made above if there is any error encountered
+            // This is what we use to undo all the transactions made above if there is any error encountered
             console.log('Rolling Back Delete')
             console.log(err)
         }
@@ -144,12 +143,12 @@ router.post('/', async (req, res) => {
         // Check for existence of the error property within this validation
         const { error } = registerSchema.validate(newAccount)
         // Throw an error if validation fails (Error will be truthy) so we can be sent to the catch section or else it will just carry on and ignore this section
-        if (error){
+        if (error) {
             throw new Error('Validation Error')
         }
-        bcrypt.hash(newAccount.password, saltRounds, async function(err, hash){
-            if (err){
-                res.status(500).json({error: 'Error hashing password!'})
+        bcrypt.hash(newAccount.password, saltRounds, async function (err, hash) {
+            if (err) {
+                res.status(500).json({ error: 'Error hashing password!' })
             }
             const result = await db.query(
                 // We are returning the id here so we can attach it to the json web token to send back
@@ -161,11 +160,11 @@ router.post('/', async (req, res) => {
                 ]
             )
         })
-        res.status(201).json({message: 'Data Submitted'});
+        res.status(201).json({ message: 'Data Submitted' });
     } catch (err) {
-        if (err.message === 'Validation error'){
+        if (err.message === 'Validation error') {
             console.error(err);
-            res.status(400).json({ error: "Validation error", details: err.details, message: 'This is a validation error'});
+            res.status(400).json({ error: "Validation error", details: err.details, message: 'This is a validation error' });
         } else {
             console.error(err);
             res.status(500).json({ error: "Database error" });
