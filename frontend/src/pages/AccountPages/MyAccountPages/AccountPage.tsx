@@ -35,7 +35,7 @@ export default function AccountPage({ onLogout }: AccountPageProps) {
                 setReservations(response.data.result)
                 setIsLoading(false)
             } catch (err) {
-                if (import.meta.env.MODE === 'development') {
+                if (import.meta.env.MODE !== 'production') {
                     console.log(err)
                 }
                 setIsLoading(false)
@@ -63,7 +63,7 @@ export default function AccountPage({ onLogout }: AccountPageProps) {
                     }
                 })
         } catch (err) {
-            if (import.meta.env.MODE === 'development') {
+            if (import.meta.env.MODE !== 'production') {
                 console.log(err)
             }
             // Notify User of the error

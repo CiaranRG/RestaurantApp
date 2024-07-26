@@ -48,7 +48,7 @@ export default function BookTableForm(){
             setFormInfo({firstName: '', lastName: '', email: '', phoneNumber: '', bookingDate: '', bookingTime: '', specialRequest: '', numOfSeats: 1, termsConditions: false})
             alert('Your reservation was submitted!')
         } catch (error) {
-            if (import.meta.env.MODE === 'development') {
+            if (import.meta.env.MODE !== 'production') {
                 console.log('There was an error', error)
             }
             // Navigating the user to the error page and passing in a code and message to use for displaying the error message

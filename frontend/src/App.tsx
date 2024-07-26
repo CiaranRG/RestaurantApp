@@ -35,7 +35,7 @@ function App() {
       // Update the client-side state, e.g., set isLoggedIn to false
       setIsLoggedIn(false);
     } catch (err) {
-      if (import.meta.env.MODE === 'development') {
+      if (import.meta.env.MODE !== 'production') {
         console.log('Logout failed');
         console.log(err);
       }
@@ -48,7 +48,7 @@ function App() {
         const isLoggedIn = await loginCheck()
         setIsLoggedIn(isLoggedIn)
       } catch (err) {
-        if (import.meta.env.MODE === 'development') {
+        if (import.meta.env.MODE !== 'production') {
           console.log(err)
         }
         setIsLoggedIn(false)

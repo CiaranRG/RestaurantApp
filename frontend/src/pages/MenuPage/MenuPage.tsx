@@ -34,7 +34,7 @@ export default function MenuPage(){
                 setIsLoading(false)
             })
             .catch((error) => {
-                if (import.meta.env.MODE === 'development') {
+                if (import.meta.env.MODE !== 'production') {
                     console.log('Error Occurred')
                     console.log(error)
                 }

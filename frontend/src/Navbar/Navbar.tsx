@@ -58,13 +58,13 @@ export default function Navbar({isLoggedIn, onLogout, onLogin}: NavbarProps){
             </div>
             <div className='centerNav'>
                 <Link to='/home'>
-                    <a href="/home">Home</a>
+                    Home
                 </Link>
                 <Link to='/menu'>
-                    <a href="/menu">Menu</a>
+                    Menu
                 </Link>
                 <Link to='/aboutUs'>
-                    <a href="/aboutUs">About Us</a>
+                    About Us
                 </Link>
                 {/* Only loading this if the isLoggedIn is true */}
                 { isLoggedIn &&
@@ -73,7 +73,7 @@ export default function Navbar({isLoggedIn, onLogout, onLogin}: NavbarProps){
             {/* Using a ternary operator to decide what to display based on login state */}
             <div className='rightNav'>
                 {/* If true this one shows, we also have a function being passed down from the app that will handle our logging out */}
-                { isLoggedIn === true ? (<><Link to='accountPage'><a href="">My Account</a></Link> <a onClick={handleLogout}>Logout</a></>) : 
+                { isLoggedIn === true ? (<><Link to='accountPage'>My Account</Link> <a onClick={handleLogout}>Logout</a></>) : 
                 // If False this one shows instead
                 (<> <a onClick={toggleLoginModal}>Login</a> <a onClick={toggleRegisterModal}>Register</a> </>)}
             </div>

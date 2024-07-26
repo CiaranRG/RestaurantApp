@@ -8,16 +8,16 @@ export default function Footer(){
         <footer className="footer">
             <div className="socialLinks">
                 <Link to='https://twitter.com'>
-                    <a href="https://twitter.com"><FontAwesomeIcon icon={faTwitter}/></a>
+                    <FontAwesomeIcon icon={faTwitter}/>
                 </Link>
                 <Link to='https://instagram.com'>
-                    <a href="https://instagram.com"><FontAwesomeIcon icon={faInstagram}/></a>
+                    <FontAwesomeIcon icon={faInstagram}/>
                 </Link>
                 <Link to='https://youtube.com'>
-                    <a href="https://youtube.com"><FontAwesomeIcon icon={faYoutube}/></a>
+                    <FontAwesomeIcon icon={faYoutube}/>
                 </Link>
                 <Link to='https://facebook.com'>
-                    <a href="https://facebook.com"><FontAwesomeIcon icon={faFacebook}/></a>
+                    <FontAwesomeIcon icon={faFacebook}/>
                 </Link>
             </div>
             <a href="https://unsplash.com/" target="_blank" rel="noopener noreferrer">All photos courtesy of Unsplash</a>

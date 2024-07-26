@@ -24,8 +24,8 @@ export default function ErrorPage({errorCode = 404, errorMessage = "This page do
                 <div className='pageWrapper'>
                     <h1 className='errorHeaderText'>{finalErrorCode}</h1>
                     <h2 className='errorHeaderTextTwo'>{finalErrorMessage}</h2>
-                    <Link to='/home' style={{textDecoration: 'none'}}>
-                        <a className='errorHomeLink'>Click here to go home!</a>
+                    <Link to='/home' className='errorHomeLink' style={{textDecoration: 'none'}}>
+                        Click here to go home!
                     </Link>
                 </div>
             </main>
