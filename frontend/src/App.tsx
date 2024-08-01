@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import './App.scss'
 import axios from 'axios'
@@ -18,8 +18,12 @@ import ErrorPage from './pages/ErrorPage/ErrorPage'
 import loginCheck from './utils/loginCheck'
 
 function App() {
-  // We use the !! to convert to a boolean and we then decide if the boolean is true or false based on the truthy/falsy value inside it currently (If theres something inside its truthy)
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // Using this function to check if isLoggedIn is already in local storage and if it is then what its value is
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    // Initial state based on local storage value
+    const storedValue = localStorage.getItem('isLoggedIn');
+    return storedValue === 'true'; // Convert string to boolean
+  });
 
   // Creating a function to handle login and logout
   const handleLogin = () => {
@@ -31,7 +35,7 @@ function App() {
   const handleLogout = async () => {
     try {
       // Make a request to the backend logout route
-      axios('http://localhost:5000/api/accounts/logout', {method: 'POST', withCredentials: true})
+      axios('http://localhost:5000/api/accounts/logout', { method: 'POST', withCredentials: true })
       // Update the client-side state, e.g., set isLoggedIn to false
       setIsLoggedIn(false);
     } catch (err) {
@@ -44,44 +48,49 @@ function App() {
 
   useEffect(() => {
     const checkLogin = async () => {
-      try {
-        const isLoggedIn = await loginCheck()
-        setIsLoggedIn(isLoggedIn)
-      } catch (err) {
-        if (import.meta.env.MODE !== 'production') {
-          console.log(err)
+      if(!isLoggedIn){
+        try {
+          const isLoggedIn = await loginCheck()
+          setIsLoggedIn(isLoggedIn)
+          localStorage.setItem('isLoggedIn', isLoggedIn); // Store in local storage
+        } catch (err) {
+          if (import.meta.env.MODE !== 'production') {
+            console.log(err)
+          }
+          setIsLoggedIn(false)
         }
-        setIsLoggedIn(false)
+      } else {
+        console.log('You are already logged in!')
       }
     }
     checkLogin()
-  }, [])  
+  }, [])
 
 
 
   return (
     <Router>
-      <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} onLogin={handleLogin}/>
-        <Routes>
-          {/* Passing in a isLoggedIn state to our page so we can use it to make decisions within the homepage */}
-          <Route path='/' element={<Homepage isLoggedIn={isLoggedIn}/>}/>
-          <Route path='/home' element={<Homepage isLoggedIn={isLoggedIn}/>}/>
-          <Route path='/menu' element={<MenuPage/>}/>
-          <Route path='/aboutUs' element={<AboutUsPage/>}/>
-          {isLoggedIn ? (
+      <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} onLogin={handleLogin} />
+      <Routes>
+        {/* Passing in a isLoggedIn state to our page so we can use it to make decisions within the homepage */}
+        <Route path='/' element={<Homepage isLoggedIn={isLoggedIn} />} />
+        <Route path='/home' element={<Homepage isLoggedIn={isLoggedIn} />} />
+        <Route path='/menu' element={<MenuPage />} />
+        <Route path='/aboutUs' element={<AboutUsPage />} />
+        {isLoggedIn ? (
           // These can only be access when the isLoggedIn state is true 
           <>
-            <Route path="/accountPage" element={<AccountPage onLogout={handleLogout}/>} />
+            <Route path="/accountPage" element={<AccountPage onLogout={handleLogout} />} />
           </>
         ) : (
           // If there was anything here it could only be accessed when logged out
           <>
-            <Route path="/accountPage" element={<ErrorPage errorCode={401} errorMessage='Unauthorized Access!'/>} />
+            <Route path="/accountPage" element={<ErrorPage errorCode={401} errorMessage='Unauthorized Access!' />} />
           </>
         )}
-        <Route path="*" element={<ErrorPage/>} />
-        </Routes>
-      <Footer/>
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+      <Footer />
     </Router>
   )
 }
