@@ -30,10 +30,6 @@ router.post('/isLoggedIn', async (req, res) => {
         if (!decodedJwt.userId) {
             return res.json({ isLoggedIn: false })
         }
-        const result = await db.query('SELECT id FROM user_accounts WHERE id = $1', [decodedJwt.userId])
-        if (result.rows.length === 0) {
-            return res.json({ isLoggedIn: false })
-        }
         res.json({ isLoggedIn: true })
     } catch (err) {
         if (process.env.NODE_ENV !== 'production') {

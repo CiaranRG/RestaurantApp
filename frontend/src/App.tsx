@@ -48,19 +48,15 @@ function App() {
 
   useEffect(() => {
     const checkLogin = async () => {
-      if(!isLoggedIn){
-        try {
-          const isLoggedIn = await loginCheck()
-          setIsLoggedIn(isLoggedIn)
-          localStorage.setItem('isLoggedIn', isLoggedIn); // Store in local storage
-        } catch (err) {
-          if (import.meta.env.MODE !== 'production') {
-            console.log(err)
-          }
-          setIsLoggedIn(false)
+      try {
+        const isLoggedIn = await loginCheck()
+        setIsLoggedIn(isLoggedIn)
+        localStorage.setItem('isLoggedIn', isLoggedIn); // Store in local storage
+      } catch (err) {
+        if (import.meta.env.MODE !== 'production') {
+          console.log(err)
         }
-      } else {
-        console.log('You are already logged in!')
+        setIsLoggedIn(false)
       }
     }
     checkLogin()
