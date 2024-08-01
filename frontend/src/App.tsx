@@ -19,11 +19,7 @@ import loginCheck from './utils/loginCheck'
 
 function App() {
   // Using this function to check if isLoggedIn is already in local storage and if it is then what its value is
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    // Initial state based on local storage value
-    const storedValue = localStorage.getItem('isLoggedIn');
-    return storedValue === 'true'; // Convert string to boolean
-  });
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   // Creating a function to handle login and logout
   const handleLogin = () => {
@@ -51,7 +47,6 @@ function App() {
       try {
         const isLoggedIn = await loginCheck()
         setIsLoggedIn(isLoggedIn)
-        localStorage.setItem('isLoggedIn', isLoggedIn); // Store in local storage
       } catch (err) {
         if (import.meta.env.MODE !== 'production') {
           console.log(err)
