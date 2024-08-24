@@ -16,6 +16,7 @@ import ErrorPage from './pages/ErrorPage/ErrorPage'
 
 // Importing utilities
 import loginCheck from './utils/loginCheck'
+import isIOS from './utils/isIOS'
 
 function App() {
   // Using this function to check if isLoggedIn is already in local storage and if it is then what its value is
@@ -27,11 +28,34 @@ function App() {
     setIsLoggedIn(true);
   };
 
+
+  // Add a request interceptor so we can send things from localStorage to the backend
+  axios.interceptors.request.use((config) => {
+    // Retrieve the token from localStorage
+    const token = localStorage.getItem('jwt');
+
+    // If a token exists, add it to the Authorization header
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    // Continue with the request
+    return config;
+  }, (error) => {
+    // Handle request error
+    return Promise.reject(error);
+  });
+
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   // Creating a logout function that queries the backend and then clears the cookie
   const handleLogout = async () => {
     try {
       // Make a request to the backend logout route
-      axios('http://localhost:5000/api/accounts/logout', { method: 'POST', withCredentials: true })
+      await axios(`${apiUrl}/api/accounts/logout`, { method: 'POST', withCredentials: true })
+      if (isIOS()) {
+        localStorage.removeItem('jwt')
+      }
       // Update the client-side state, e.g., set isLoggedIn to false
       setIsLoggedIn(false);
     } catch (err) {
@@ -45,8 +69,21 @@ function App() {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        const isLoggedIn = await loginCheck()
-        setIsLoggedIn(isLoggedIn)
+        let loginStatus = await loginCheck()
+        if (isIOS()) {
+          alert('On IOS')
+          const jwtToken = localStorage.getItem('jwt');
+          if (jwtToken) {
+            alert(`JWT found in localStorage: ${jwtToken}`);
+            console.log(`JWT found in localStorage: ${jwtToken}`);
+            loginStatus = true;
+          } else {
+            alert("No JWT found in localStorage.");
+            console.log("No JWT found in localStorage.");
+          }
+        }
+        setIsLoggedIn(loginStatus)
+        alert(`Final login status: ${loginStatus}`);
       } catch (err) {
         if (import.meta.env.MODE !== 'production') {
           console.log(err)

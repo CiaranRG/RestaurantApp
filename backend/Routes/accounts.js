@@ -62,17 +62,20 @@ router.post('/login', async (req, res) => {
                 // Creating the json web token that has the userId in it, also pulling the secret from our .env file and setting it to expire in 2 weeks
                 const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '2w' });
                 // Passing the token we created into here so we can then add the cookie to the response headers, js-cookie is front end only when dealing with cookies
-                res.cookie('jwt', token, {
-                    // Setting httpOnly to true so it can help prevent XSS attacks through javascript interaction
-                    httpOnly: true,
-                    // When we start the app or when its hosting on a site the environment will be set to production which will make the secure option true, which allows only https requests
-                    secure: process.env.NODE_ENV === 'production',
-                    // 
-                    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-                    // 2 weeks in milliseconds
-                    maxAge: 14 * 24 * 60 * 60 * 1000,
-                });
-                res.status(201).json({ message: 'User Was Found', token })
+                if (!loginAccount.isIOS) {
+                    res.cookie('jwt', token, {
+                        // Setting httpOnly to true so it can help prevent XSS attacks through javascript interaction
+                        httpOnly: true,
+                        // When we start the app or when its hosting on a site the environment will be set to production which will make the secure option true, which allows only https requests
+                        secure: process.env.NODE_ENV === 'production',
+                        // 
+                        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+                        // 2 weeks in milliseconds
+                        maxAge: 14 * 24 * 60 * 60 * 1000,
+                    });
+                    return res.status(201).json({ message: 'User Was Found', token: token })
+                }
+                res.status(201).json({ message: 'User Was Found', token: token })
             } else {
                 throw new Error('Invalid user credentials')
             }
@@ -100,7 +103,7 @@ router.post('/login', async (req, res) => {
 
 router.post('/logout', async (req, res) => {
     // Using this to clear the cookie on the clients side
-    res.clearCookie('jwt', { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'Strict', path: '/' });
+    res.clearCookie('jwt', { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', path: '/' });
     // Send a response to the client
     res.status(200).json({ message: 'Logout successful' });
 })
