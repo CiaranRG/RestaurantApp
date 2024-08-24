@@ -9,11 +9,11 @@ type isLoggedInType = {
     isLoggedIn: boolean
 }
 
-export default function Homepage({isLoggedIn}: isLoggedInType){
+export default function Homepage({ isLoggedIn }: isLoggedInType) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    useEffect(()=>{
+    useEffect(() => {
         document.title = 'Home'
-    },[])
+    }, [])
 
     // Creating a function for toggling the modal to be the opposite of what it Currently is
     const toggleModal = () => {
@@ -30,7 +30,7 @@ export default function Homepage({isLoggedIn}: isLoggedInType){
         }
     }
 
-    return(
+    return (
         <>
             <main className='pageBackground'>
                 <div className='pageWrapper'>
@@ -38,14 +38,14 @@ export default function Homepage({isLoggedIn}: isLoggedInType){
                     <h2 className='homeHeaderTextTwo'>Serving great italian food since 1999</h2>
                     <h2 className='homeHeaderTextTwo'>Browse our menu or create an account to book a table!</h2>
                     <div className='homeButtons'>
-                    <Button classProp='homePageButtons' text={'Book A Table'} onClick={toggleBookingModal}/>
+                        <Button classProp='homePageButtons' text={'Book A Table'} onClick={toggleBookingModal} />
                         <Link to='/menu'>
-                            <Button classProp='homePageButtons' text={'View Menu'}/>
+                            <Button classProp='homePageButtons' text={'View Menu'} />
                         </Link>
                     </div>
                 </div>
             </main>
-            <Modal isOpen={isModalOpen} toggleModal={toggleModal}><BookTableForm/></Modal>
+            <Modal isOpen={isModalOpen} toggleModal={toggleModal}><BookTableForm /></Modal>
         </>
     )
 }

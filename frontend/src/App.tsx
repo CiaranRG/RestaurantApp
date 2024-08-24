@@ -52,9 +52,10 @@ function App() {
   const handleLogout = async () => {
     try {
       // Make a request to the backend logout route
-      await axios(`${apiUrl}/api/accounts/logout`, { method: 'POST', withCredentials: true })
       if (isIOS()) {
         localStorage.removeItem('jwt')
+      } else {
+        await axios(`${apiUrl}/api/accounts/logout`, { method: 'POST', withCredentials: true })
       }
       // Update the client-side state, e.g., set isLoggedIn to false
       setIsLoggedIn(false);
@@ -71,19 +72,13 @@ function App() {
       try {
         let loginStatus = await loginCheck()
         if (isIOS()) {
-          alert('On IOS')
           const jwtToken = localStorage.getItem('jwt');
           if (jwtToken) {
-            alert(`JWT found in localStorage: ${jwtToken}`);
-            console.log(`JWT found in localStorage: ${jwtToken}`);
             loginStatus = true;
-          } else {
-            alert("No JWT found in localStorage.");
-            console.log("No JWT found in localStorage.");
           }
         }
         setIsLoggedIn(loginStatus)
-        alert(`Final login status: ${loginStatus}`);
+
       } catch (err) {
         if (import.meta.env.MODE !== 'production') {
           console.log(err)
